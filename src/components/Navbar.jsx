@@ -9,15 +9,38 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const links = ['Products', 'About', 'Contact']
 
+  const [hoveredIndex, setHoveredIndex] = useState(null)
+  const [theme, setTheme] = useState('dark') // 'dark' or 'light'
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
     }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
-  const [hoveredIndex, setHoveredIndex] = useState(null)
+    // Intersection Observer to detect section theme
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "-10% 0% -80% 0%" // Focus on the top part of the viewport where the navbar is
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionTheme = entry.target.getAttribute('data-theme')
+          if (sectionTheme) setTheme(sectionTheme)
+        }
+      })
+    }, observerOptions)
+
+    const sections = document.querySelectorAll('[data-theme]')
+    sections.forEach((section) => observer.observe(section))
+
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      sections.forEach((section) => observer.unobserve(section))
+    }
+  }, [])
 
   return (
     <>
@@ -33,16 +56,18 @@ export default function Navbar() {
           <Magnetic strength={15}>
             <motion.div 
               animate={{ 
-                x: isScrolled ? 0 : 0, 
-                y: isScrolled ? 0 : 0,
                 scale: isScrolled ? 1 : 1.1
               }}
-              className="island-glass rounded-full px-8 py-3 flex items-center h-16 w-48 relative overflow-hidden group/logo"
+              className={`island-glass rounded-full px-8 py-3 flex items-center h-16 w-48 relative overflow-hidden group/logo transition-colors duration-500 ${
+                theme === 'light' ? 'bg-black/5 border-black/10' : 'bg-white/5 border-white/10'
+              }`}
             >
               <img 
                 src={logoImg} 
                 alt="Veltrix Labs" 
-                className="absolute inset-0 w-full h-full object-contain scale-[2] mix-blend-screen brightness-150 transition-all duration-500 group-hover/logo:brightness-200 group-hover/logo:scale-[2.1]"
+                className={`absolute inset-0 w-full h-full object-contain scale-[2] transition-all duration-500 group-hover/logo:scale-[2.1] ${
+                  theme === 'light' ? 'mix-blend-multiply brightness-50' : 'mix-blend-screen brightness-150 group-hover/logo:brightness-200'
+                }`}
               />
             </motion.div>
           </Magnetic>
@@ -50,11 +75,15 @@ export default function Navbar() {
           {/* Island 2: The Navigation Dock */}
           <motion.div 
             animate={{ 
-              backgroundColor: isScrolled ? 'rgba(255,255,255,0.03)' : 'rgba(255,255,255,0.01)',
+              backgroundColor: theme === 'light' 
+                ? (isScrolled ? 'rgba(0,0,0,0.05)' : 'rgba(0,0,0,0.02)')
+                : (isScrolled ? 'rgba(255,255,255,0.03)' : 'rgba(255,255,255,0.01)'),
               padding: isScrolled ? '8px 12px' : '12px 24px',
               scale: isScrolled ? 0.95 : 1
             }}
-            className="hidden md:flex island-glass rounded-[40px] relative items-center justify-center min-h-[64px]"
+            className={`hidden md:flex island-glass rounded-[40px] relative items-center justify-center min-h-[64px] transition-colors duration-500 ${
+              theme === 'light' ? 'border-black/10' : 'border-white/10'
+            }`}
             onMouseLeave={() => setHoveredIndex(null)}
           >
             {/* Liquid Under-Indicator */}
@@ -86,8 +115,12 @@ export default function Navbar() {
                   <Magnetic strength={20}>
                     <motion.a
                       href={`#${link.toLowerCase()}`}
-                      className="text-[10px] font-black tracking-[0.4em] uppercase py-3 transition-colors duration-300 transform"
-                      style={{ color: hoveredIndex === i ? '#fff' : 'rgba(255,255,255,0.3)' }}
+                      className="text-[10px] font-black tracking-[0.4em] uppercase py-3 transition-colors duration-500 transform"
+                      style={{ 
+                        color: hoveredIndex === i 
+                          ? (theme === 'light' ? '#000' : '#fff') 
+                          : (theme === 'light' ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.3)') 
+                      }}
                     >
                       {link}
                     </motion.a>
@@ -103,17 +136,23 @@ export default function Navbar() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="hidden md:flex island-glass rounded-full px-10 py-4 text-[9px] font-black uppercase tracking-[0.3em] text-white hover:bg-white hover:text-black transition-all duration-500 group/cta relative overflow-hidden"
+                className={`hidden md:flex island-glass rounded-full px-10 py-4 text-[9px] font-black uppercase tracking-[0.3em] transition-all duration-500 group/cta relative overflow-hidden ${
+                  theme === 'light' 
+                    ? 'text-black border-black/10 hover:bg-black hover:text-white' 
+                    : 'text-white border-white/10 hover:bg-white hover:text-black'
+                }`}
               >
                 <span className="relative z-10">Request Access</span>
                 {/* HUD Scanline */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/cta:translate-x-full transition-transform duration-1000 ease-in-out" />
+                <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-current opacity-10 to-transparent -translate-x-full group-hover/cta:translate-x-full transition-transform duration-1000 ease-in-out`} />
               </motion.button>
             </Magnetic>
 
             {/* Mobile Menu Trigger */}
             <div 
-              className="md:hidden island-glass p-5 rounded-full interactive cursor-pointer text-white hover:scale-110 transition-all"
+              className={`md:hidden island-glass p-5 rounded-full interactive cursor-pointer hover:scale-110 transition-all duration-500 ${
+                theme === 'light' ? 'text-black border-black/10' : 'text-white border-white/10'
+              }`}
               onClick={() => setIsOpen(!isOpen)}
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}

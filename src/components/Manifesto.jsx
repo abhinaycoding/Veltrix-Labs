@@ -15,6 +15,7 @@ export default function Manifesto() {
 
   return (
     <section 
+      id="manifesto"
       ref={containerRef}
       className="min-h-screen relative w-full flex flex-col justify-center overflow-hidden bg-white text-black py-40 select-none"
     >

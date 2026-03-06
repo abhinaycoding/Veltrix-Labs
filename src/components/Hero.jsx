@@ -122,10 +122,10 @@ export default function Hero({ onEnterClick }) {
           <CTAButton onClick={onEnterClick} text={siteContent.hero.ctaText} />
           
           <button 
-            onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => document.getElementById('manifesto')?.scrollIntoView({ behavior: 'smooth' })}
             className="group flex items-center gap-3 px-8 py-5 rounded-full border border-white/20 text-white/70 hover:text-white hover:border-white/50 hover:bg-white/5 transition-all duration-300"
           >
-            <span className="font-heading font-bold tracking-[0.2em] uppercase text-xs">Read Manifesto</span>
+            <span className="font-heading font-bold tracking-[0.2em] uppercase text-xs">READ MANIFESTO</span>
           </button>
         </motion.div>
       </div>

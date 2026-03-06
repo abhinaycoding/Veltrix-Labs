@@ -39,18 +39,33 @@ export default function Home() {
       {/* Foreground Interactive Content */}
       <div className="relative z-10 flex flex-col">
         <Navbar />
-        <Hero onEnterClick={scrollToVision} data-theme="dark" />
+        <div data-theme="dark">
+          <Hero onEnterClick={scrollToVision} />
+        </div>
         
-        <CoreAnswers data-theme="dark" />
+        <div data-theme="dark">
+          <CoreAnswers />
+        </div>
         
         <div ref={visionRef} data-theme="dark">
           <Vision />
         </div>
         
-        <Services data-theme="dark" />
-        <Manifesto data-theme="light" />
-        <ProductShowcase data-theme="dark" />
-        <Innovation data-theme="dark" />
+        <div data-theme="dark">
+          <Services />
+        </div>
+
+        <div data-theme="light">
+          <Manifesto />
+        </div>
+
+        <div data-theme="dark">
+          <ProductShowcase />
+        </div>
+
+        <div data-theme="dark">
+          <Innovation />
+        </div>
         <Footer />
       </div>
 

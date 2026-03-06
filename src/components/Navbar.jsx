@@ -19,8 +19,8 @@ export default function Navbar() {
 
     // Intersection Observer to detect section theme
     const observerOptions = {
-      threshold: 0.1,
-      rootMargin: "-10% 0% -80% 0%" // Focus on the top part of the viewport where the navbar is
+      threshold: [0, 0.1, 0.5, 0.9, 1],
+      rootMargin: "-20% 0% -79% 0%" // Slightly wider area to ensure detection as we scroll
     }
 
     const observer = new IntersectionObserver((entries) => {

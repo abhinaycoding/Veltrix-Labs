@@ -17,7 +17,7 @@ export default function Hero({ onEnterClick }) {
   const smoothMouseX = useSpring(mouseX, springConfig)
   const smoothMouseY = useSpring(mouseY, springConfig)
 
-  // Background Parallax Transforms
+  // Background Parallax Transforms (Mouse only)
   const bgX = useTransform(smoothMouseX, [-800, 800], [20, -20])
   const bgY = useTransform(smoothMouseY, [-400, 400], [20, -20])
 
@@ -35,17 +35,6 @@ export default function Hero({ onEnterClick }) {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [mouseX, mouseY])
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"]
-  })
-
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
-  const scrollYParallax = useTransform(scrollYProgress, [0, 1], [0, 400])
-  const combinedY = useTransform([scrollYParallax, bgY], ([s, m]) => s + m)
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
-  const scaleValue = useTransform(scrollYProgress, [0, 1], [1, 0.9])
-
   return (
     <section 
       ref={ref}
@@ -55,21 +44,19 @@ export default function Hero({ onEnterClick }) {
       {/* Premium Hero Background Image with Parallax */}
       <div className="absolute inset-0 -z-20 overflow-hidden">
         <motion.img
-          style={{ y: combinedY, x: bgX, scale: 1.15 }}
+          style={{ y: bgY, x: bgX }}
           src={heroImg}
           alt=""
-          className="w-full h-full object-cover opacity-60"
+          className="w-full h-full object-cover opacity-60 scale-[1.05]"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black" />
       </div>
 
       {/* Intense Center Neon Flare */}
       <motion.div 
-        style={{ scale: scaleValue }}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] md:w-[60vw] h-[120vw] md:h-[60vw] rounded-full opacity-30 pointer-events-none mix-blend-screen"
         animate={{ 
           opacity: [0.1, 0.3, 0.1],
-          scale: [0.9, 1.1, 0.9]
         }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       >
@@ -81,9 +68,8 @@ export default function Hero({ onEnterClick }) {
         <div className="w-[800px] h-[800px] radial-glow opacity-10 animate-pulse transition-opacity duration-1000" />
       </div>
 
-      <motion.div 
-        style={{ y: textY, opacity, scale: scaleValue }}
-        className="max-w-7xl mx-auto px-8 flex flex-col items-center text-center"
+      <div 
+        className="max-w-7xl mx-auto px-8 flex flex-col items-center text-center relative z-10"
       >
         {/* Cinematic Headline - Agency Brand */}
         <div className="mb-0 relative flex justify-center w-full z-20 flex-col items-center">
@@ -121,7 +107,7 @@ export default function Hero({ onEnterClick }) {
         >
           <CTAButton onClick={onEnterClick} text={siteContent.hero.ctaText} />
         </motion.div>
-      </motion.div>
+      </div>
 
       {/* Decorative Animated Lines */}
       <div className="absolute bottom-16 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/5 to-transparent z-10" />

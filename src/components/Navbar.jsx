@@ -58,15 +58,17 @@ export default function Navbar() {
               animate={{ 
                 scale: isScrolled ? 1 : 1.1
               }}
-              className={`island-glass rounded-full px-8 py-3 flex items-center h-16 w-48 relative overflow-hidden group/logo transition-colors duration-500 ${
-                theme === 'light' ? 'bg-black/5 border-black/10' : 'bg-white/5 border-white/10'
+              className={`island-glass rounded-full px-8 py-3 flex items-center h-16 w-48 relative overflow-hidden group/logo transition-all duration-500 ${
+                theme === 'light' 
+                  ? 'bg-black/[0.03] border-black/10 shadow-[0_8px_32px_rgba(0,0,0,0.1)]' 
+                  : 'bg-white/5 border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.6)]'
               }`}
             >
               <img 
                 src={logoImg} 
                 alt="Veltrix Labs" 
                 className={`absolute inset-0 w-full h-full object-contain scale-[2] transition-all duration-500 group-hover/logo:scale-[2.1] ${
-                  theme === 'light' ? 'mix-blend-multiply brightness-50' : 'mix-blend-screen brightness-150 group-hover/logo:brightness-200'
+                  theme === 'light' ? 'brightness-0 opacity-80' : 'mix-blend-screen brightness-150 group-hover/logo:brightness-200'
                 }`}
               />
             </motion.div>
@@ -76,13 +78,15 @@ export default function Navbar() {
           <motion.div 
             animate={{ 
               backgroundColor: theme === 'light' 
-                ? (isScrolled ? 'rgba(0,0,0,0.05)' : 'rgba(0,0,0,0.02)')
+                ? (isScrolled ? 'rgba(0,0,0,0.03)' : 'rgba(0,0,0,0.01)')
                 : (isScrolled ? 'rgba(255,255,255,0.03)' : 'rgba(255,255,255,0.01)'),
               padding: isScrolled ? '8px 12px' : '12px 24px',
               scale: isScrolled ? 0.95 : 1
             }}
-            className={`hidden md:flex island-glass rounded-[40px] relative items-center justify-center min-h-[64px] transition-colors duration-500 ${
-              theme === 'light' ? 'border-black/10' : 'border-white/10'
+            className={`hidden md:flex island-glass rounded-[40px] relative items-center justify-center min-h-[64px] transition-all duration-500 ${
+              theme === 'light' 
+                ? 'border-black/10 shadow-[0_8px_32px_rgba(0,0,0,0.1)]' 
+                : 'border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.6)]'
             }`}
             onMouseLeave={() => setHoveredIndex(null)}
           >
@@ -91,7 +95,7 @@ export default function Navbar() {
               {hoveredIndex !== null && (
                 <motion.div
                   layoutId="liquid-nav"
-                  className="liquid-indicator"
+                  className={`liquid-indicator ${theme === 'light' ? 'bg-black/5' : 'bg-white/10'}`}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
@@ -138,8 +142,8 @@ export default function Navbar() {
                 whileTap={{ scale: 0.95 }}
                 className={`hidden md:flex island-glass rounded-full px-10 py-4 text-[9px] font-black uppercase tracking-[0.3em] transition-all duration-500 group/cta relative overflow-hidden ${
                   theme === 'light' 
-                    ? 'text-black border-black/10 hover:bg-black hover:text-white' 
-                    : 'text-white border-white/10 hover:bg-white hover:text-black'
+                    ? 'text-black border-black/10 hover:bg-black hover:text-white shadow-[0_8px_32px_rgba(0,0,0,0.1)]' 
+                    : 'text-white border-white/10 hover:bg-white hover:text-black shadow-[0_8px_32px_rgba(0,0,0,0.6)]'
                 }`}
               >
                 <span className="relative z-10">Request Access</span>
@@ -151,7 +155,9 @@ export default function Navbar() {
             {/* Mobile Menu Trigger */}
             <div 
               className={`md:hidden island-glass p-5 rounded-full interactive cursor-pointer hover:scale-110 transition-all duration-500 ${
-                theme === 'light' ? 'text-black border-black/10' : 'text-white border-white/10'
+                theme === 'light' 
+                  ? 'text-black border-black/10 shadow-[0_8px_32px_rgba(0,0,0,0.1)]' 
+                  : 'text-white border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.6)]'
               }`}
               onClick={() => setIsOpen(!isOpen)}
             >

@@ -4,7 +4,10 @@ export default function Footer() {
   const { footer } = siteContent
 
   return (
-    <footer className="bg-[#0a0a0a] text-white pt-24 pb-12 px-6 md:px-12 border-t border-white/10 relative z-10 w-full overflow-hidden">
+    <footer className="text-white pt-24 pb-12 px-6 md:px-12 border-t border-white/10 relative z-10 w-full overflow-hidden">
+      {/* Dynamic Background Pattern */}
+      <div className="absolute inset-0 pattern-footer -z-20" />
+      <div className="absolute inset-0 bg-black/85 backdrop-blur-[2px] -z-10" />
       
       {/* Massive Brand Name - "Vooma" style */}
       <div className="w-full flex justify-center mb-16 md:mb-24">

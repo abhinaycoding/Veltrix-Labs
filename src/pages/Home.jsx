@@ -13,6 +13,7 @@ import Services from '../components/Services'
 import Manifesto from '../components/Manifesto'
 import Footer from '../components/Footer'
 import CoreAnswers from '../components/CoreAnswers'
+import Plans from '../components/Plans'
 
 export default function Home() {
   const visionRef = useRef(null)
@@ -38,7 +39,6 @@ export default function Home() {
 
       {/* Foreground Interactive Content */}
       <div className="relative z-10 flex flex-col">
-        <Navbar />
         <div data-theme="dark">
           <Hero onEnterClick={scrollToVision} />
         </div>
@@ -47,7 +47,7 @@ export default function Home() {
           <CoreAnswers />
         </div>
         
-        <div ref={visionRef} data-theme="dark">
+        <div id="about" ref={visionRef} data-theme="dark">
           <Vision />
         </div>
         
@@ -59,12 +59,16 @@ export default function Home() {
           <Manifesto />
         </div>
 
-        <div data-theme="dark">
+        <div id="products" data-theme="dark">
           <ProductShowcase />
         </div>
 
         <div data-theme="dark">
           <Innovation />
+        </div>
+
+        <div data-theme="dark">
+          <Plans />
         </div>
         <Footer />
       </div>

@@ -1,5 +1,6 @@
-import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue, useMotionTemplate } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import Magnetic from './Magnetic'
 import { Menu, X } from 'lucide-react'
 import logoImg from '../assets/logo_original_user.png'
@@ -10,7 +11,27 @@ export default function Navbar() {
   const [theme, setTheme] = useState('dark')
   const [hoveredIndex, setHoveredIndex] = useState(null)
   const navRef = useRef(null)
-  const links = ['Products', 'About', 'Contact']
+  const location = useLocation()
+  
+  const links = [
+    { name: 'Products', path: '/#products' },
+    { name: 'About', path: '/#about' },
+    { name: 'Contact', path: '/contact' }
+  ]
+
+  // Handle smooth scrolling for hash links
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
 
   // Mouse tracking for local glow effect
   const mouseX = useMotionValue(0)
@@ -18,7 +39,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+      setIsScrolled(window.scrollY > 20)
     }
 
     const handleMouseMove = (e) => {
@@ -55,82 +76,96 @@ export default function Navbar() {
     }
   }, [mouseX, mouseY])
 
-  const glowStyle = {
-    '--x': `${mouseX.get()}px`,
-    '--y': `${mouseY.get()}px`,
-  }
+  const background = useMotionTemplate`radial-gradient(150px circle at ${mouseX}px ${mouseY}px, rgba(173, 255, 47, 0.15), transparent)`
 
   return (
     <>
       <motion.nav 
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-0 left-0 w-full z-[100] px-6 py-8 flex justify-center pointer-events-none"
+        className="fixed top-0 left-0 w-full z-[100] flex justify-center pointer-events-none"
       >
         <motion.div 
           ref={navRef}
-          style={glowStyle}
           animate={{ 
-            width: isScrolled ? 'auto' : '100%',
-            maxWidth: isScrolled ? '600px' : '1200px',
-            padding: isScrolled ? '8px 8px' : '12px 16px',
-            borderRadius: isScrolled ? '100px' : '24px',
+            y: 0,
+            opacity: 1,
+            width: '100%',
+            maxWidth: '100%',
+            padding: '20px 48px',
             backgroundColor: theme === 'light' 
-              ? (isScrolled ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.8)')
-              : (isScrolled ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.3)'),
+              ? 'rgba(255,255,255,0.85)'
+              : 'rgba(10,10,10,0.85)',
+            backdropFilter: 'blur(32px) saturate(180%)',
           }}
-          className={`meta-glass flex items-center justify-between pointer-events-auto relative glow-follow group/nav shadow-2xl ${
-            theme === 'light' ? 'border-black/10' : 'border-white/10'
+          transition={{
+            type: "spring",
+            stiffness: 150,
+            damping: 30,
+            mass: 0.8,
+          }}
+          className={`nav-glass flex items-center justify-between pointer-events-auto relative group/nav shadow-2xl border-b ${
+            theme === 'light' ? 'border-black/5' : 'border-white/5'
           }`}
         >
+          {/* Radial Hover Glow Layer */}
+          <motion.div 
+            className="pointer-events-none absolute inset-0 z-0 opacity-0 group-hover/nav:opacity-100 transition-opacity duration-500"
+            style={{ background }}
+          />
           {/* Logo Section */}
-          <Magnetic strength={10}>
-            <div className="flex items-center px-4 shrink-0 cursor-pointer">
-              <div className={`w-32 h-10 relative transition-all duration-500 ${isScrolled ? 'w-8 h-8 opacity-80' : 'w-32'}`}>
-                <img 
-                  src={logoImg} 
-                  alt="Veltrix" 
-                  className={`w-full h-full object-contain transition-all duration-500 ${
-                    theme === 'light' ? 'brightness-0' : 'mix-blend-screen brightness-150'
-                  }`}
-                />
-              </div>
-            </div>
-          </Magnetic>
+          <Link to="/" className="flex items-center px-6 shrink-0 cursor-pointer">
+            <motion.div 
+              animate={{ opacity: 1 }}
+              className="h-20 flex items-center justify-center"
+            >
+              <img 
+                src={logoImg} 
+                alt="Veltrix" 
+                className={`w-auto h-full object-contain relative z-10 ${
+                  theme === 'light' 
+                    ? 'invert mix-blend-multiply' 
+                    : 'mix-blend-screen'
+                }`}
+              />
+            </motion.div>
+          </Link>
 
           {/* Navigation Items */}
-          <div className="hidden md:flex items-center px-2">
-            <div className="flex bg-black/5 dark:bg-white/5 rounded-full p-1 border border-current/5 backdrop-blur-sm">
+          <div className="hidden md:flex items-center px-4 relative z-10">
+            <div className={`flex rounded-full p-1.5 border transition-colors duration-500 shadow-inner ${
+              theme === 'light' ? 'bg-black/5 border-black/5' : 'bg-white/5 border-white/5'
+            }`}>
               {links.map((link, i) => (
-                <Magnetic key={link} strength={15}>
-                  <a
-                    href={`#${link.toLowerCase()}`}
+                <Magnetic key={link.name} strength={10}>
+                  <Link
+                    to={link.path}
                     onMouseEnter={() => setHoveredIndex(i)}
                     onMouseLeave={() => setHoveredIndex(null)}
-                    className={`relative px-6 py-2 text-[11px] font-black uppercase tracking-[0.25em] transition-all duration-300 rounded-full ${
+                    className={`relative px-6 py-2.5 text-[11px] font-black uppercase tracking-[0.25em] transition-all duration-300 rounded-full ${
                       theme === 'light' 
-                        ? (hoveredIndex === i ? 'text-white bg-black' : 'text-black/60 hover:text-black')
-                        : (hoveredIndex === i ? 'text-black bg-white' : 'text-white/60 hover:text-white')
+                        ? (hoveredIndex === i ? 'text-white bg-black' : 'text-black/70')
+                        : (hoveredIndex === i ? 'text-black bg-white' : 'text-white/70')
                     }`}
                   >
-                    {link}
-                  </a>
+                    {link.name}
+                  </Link>
                 </Magnetic>
               ))}
             </div>
           </div>
 
           {/* CTA / Action */}
-          <div className="flex items-center px-2">
-            <button className={`flex items-center justify-center px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 ${
-              theme === 'light'
-                ? 'bg-black text-white hover:bg-black/80'
-                : 'bg-white text-black hover:bg-white/80'
-            } ${isScrolled ? 'px-4' : 'px-8'}`}>
-              <span className={isScrolled ? 'hidden lg:block' : 'block'}>Access</span>
-              <Menu className="md:hidden w-5 h-5 ml-0" onClick={() => setIsOpen(true)} />
-            </button>
+          <div className="flex items-center px-4 relative z-10">
+            <Link 
+              to="/contact"
+              className={`flex items-center justify-center rounded-full text-[11px] font-black uppercase tracking-[0.25em] transition-all duration-500 hover:scale-[1.05] hover:shadow-[0_0_25px_rgba(255,255,255,0.2)] active:scale-[0.95] ${
+                theme === 'light'
+                  ? 'bg-black text-white hover:bg-zinc-800'
+                  : 'bg-white text-black hover:bg-zinc-100'
+              } px-8 py-3`}
+            >
+              <span className="block">Access</span>
+              <Menu className="md:hidden w-6 h-6 ml-4" onClick={(e) => { e.preventDefault(); setIsOpen(true); }} />
+            </Link>
           </div>
         </motion.div>
       </motion.nav>
@@ -146,15 +181,15 @@ export default function Navbar() {
           >
             <X size={32} className="absolute top-12 right-12 cursor-pointer text-white" onClick={() => setIsOpen(false)} />
             <div className="flex flex-col space-y-8 items-center">
-              {links.map((link, i) => (
-                <a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
-                  onClick={() => setIsOpen(false)}
+              {links.map((link) => (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                   onClick={() => setIsOpen(false)}
                   className="text-5xl font-black text-white/20 hover:text-white uppercase tracking-tighter transition-all"
                 >
-                  {link}
-                </a>
+                  {link.name}
+                </Link>
               ))}
             </div>
           </motion.div>

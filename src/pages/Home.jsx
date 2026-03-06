@@ -12,6 +12,7 @@ import Innovation from '../components/Innovation'
 import Services from '../components/Services'
 import Manifesto from '../components/Manifesto'
 import Footer from '../components/Footer'
+import Section3D from '../components/Section3D'
 
 export default function Home() {
   const visionRef = useRef(null)
@@ -36,17 +37,35 @@ export default function Home() {
       <HUD />
 
       {/* Foreground Interactive Content */}
-      <div className="relative z-10 flex flex-col">
+      <div className="relative z-10 flex flex-col perspective-[2000px] overflow-x-hidden">
         <Navbar />
         <Hero onEnterClick={scrollToVision} />
-        <div ref={visionRef}>
-          <Vision />
-        </div>
-        <Services />
-        <Manifesto />
-        <ProductShowcase />
-        <Innovation />
-        <Footer />
+        
+        <Section3D>
+          <div ref={visionRef}>
+            <Vision />
+          </div>
+        </Section3D>
+        
+        <Section3D>
+          <Services />
+        </Section3D>
+        
+        <Section3D>
+          <Manifesto />
+        </Section3D>
+        
+        <Section3D>
+          <ProductShowcase />
+        </Section3D>
+        
+        <Section3D>
+          <Innovation />
+        </Section3D>
+        
+        <Section3D>
+          <Footer />
+        </Section3D>
       </div>
 
       {/* Interactive Cursor Layer */}

@@ -146,3 +146,12 @@
 .liquid-indicator {
   @apply absolute bg-white/10 rounded-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)];
 }
+
+/* Hide scrollbar for internal sticky sections */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

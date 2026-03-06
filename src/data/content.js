@@ -14,15 +14,15 @@ export const siteContent = {
     items: [
       {
         question: "What is Veltrix?",
-        answer: "We are an elite digital agency blending <span class='text-[#ADFF2F]'>world-class design</span> with high-performance engineering to build exceptional software for the next generation of startups."
+        answer: "We are a <span class='text-[#ADFF2F]'>venture-grade engineering</span> lab. We don't just build websites; we architect digital products designed to disrupt markets and accelerate growth."
       },
       {
         question: "What do we build?",
-        answer: "From immersive web platforms and <span class='text-[#ADFF2F]'>smart interfaces</span> to custom enterprise software, we engineer full-stack solutions designed to scale."
+        answer: "Bespoke <span class='text-[#ADFF2F]'>SaaS platforms</span>, high-conversion marketing sites, and scalable enterprise backends. We turn complex problems into elegant, frictionless experiences."
       },
       {
         question: "Why should you care?",
-        answer: "Because average fails. We deliver <span class='text-[#ADFF2F]'>speed, reliability, and precision</span>—equipping your business with the ultimate unfair advantage in a crowded market."
+        answer: "Because speed and execution win. We give founders an <span class='text-[#ADFF2F]'>unfair technical advantage</span>, delivering premium software faster than in-house teams."
       }
     ]
   },

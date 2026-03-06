@@ -1,0 +1,140 @@
+﻿
+C:\Users\admin\Desktop\Veltrix Labs\src\components\AnimatedHeading.jsx
+  1:10  error  'useState' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u    no-unused-vars
+
+C:\Users\admin\Desktop\Veltrix Labs\src\components\CTAButton.jsx
+  1:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\admin\Desktop\Veltrix Labs\src\components\CinematicOverlay.jsx
+  1:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\admin\Desktop\Veltrix Labs\src\components\CustomCursor.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\admin\Desktop\Veltrix Labs\src\components\GlitchText.jsx
+  1:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\admin\Desktop\Veltrix Labs\src\components\HUD.jsx
+   1:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                  no-unused-vars
+   2:10  error  'useRef' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                  no-unused-vars
+   2:18  error  'useState' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                no-unused-vars
+   2:28  error  'useEffect' is defined but never used. Allowed unused vars must match /^[A-Z_]/u               no-unused-vars
+   8:9   error  'topLeftY' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u       no-unused-vars
+   9:9   error  'bottomRightX' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u   no-unused-vars
+  10:9   error  'progressWidth' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\admin\Desktop\Veltrix Labs\src\components\Hero.jsx
+  1:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\admin\Desktop\Veltrix Labs\src\components\Innovation.jsx
+  1:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\admin\Desktop\Veltrix Labs\src\components\Magnetic.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\admin\Desktop\Veltrix Labs\src\components\Navbar.jsx
+  1:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\admin\Desktop\Veltrix Labs\src\components\ParticleBackground.jsx
+   37:20  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  35 |             y: THREE.MathUtils.randFloatSpread(80),
+  36 |             z: THREE.MathUtils.randFloatSpread(50),
+> 37 |             speed: Math.random() * 0.015 + 0.005,
+     |                    ^^^^^^^^^^^^^ Cannot call impure function
+  38 |             phase: Math.random() * Math.PI * 2,
+  39 |             baseX: 0, baseY: 0, baseZ: 0
+  40 |         })  react-hooks/purity
+   38:20  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  36 |             z: THREE.MathUtils.randFloatSpread(50),
+  37 |             speed: Math.random() * 0.015 + 0.005,
+> 38 |             phase: Math.random() * Math.PI * 2,
+     |                    ^^^^^^^^^^^^^ Cannot call impure function
+  39 |             baseX: 0, baseY: 0, baseZ: 0
+  40 |         })
+  41 |     }                                                react-hooks/purity
+   74:7   error  Error: This value cannot be modified
+
+Modifying a value previously passed as an argument to a hook is not allowed. Consider moving the modification before calling the hook.
+
+  72 |     for (let i = 0; i < count; i++) {
+  73 |       const p = particles[i]
+> 74 |       p.x += Math.sin(clockTime * p.speed + p.phase) * 0.03
+     |       ^ `particles` cannot be modified
+  75 |       p.y += Math.cos(clockTime * p.speed + p.phase) * 0.03
+  76 |       p.x += (p.baseX - p.x) * 0.005
+  77 |       p.y += (p.baseY - p.y) * 0.005                                                                                                                                                                     react-hooks/immutability
+   90:7   error  Error: This value cannot be modified
+
+Modifying a value previously passed as an argument to a hook is not allowed. Consider moving the modification before calling the hook.
+
+  88 |       }
+  89 |
+> 90 |       positions[i * 3] = p.x
+     |       ^^^^^^^^^ `positions` cannot be modified
+  91 |       positions[i * 3 + 1] = p.y + scrollOffset
+  92 |       positions[i * 3 + 2] = p.z
+  93 |                                                                                                                                                                                                                                                                                                            react-hooks/immutability
+  106:13  error  Error: This value cannot be modified
+
+Modifying a value previously passed as an argument to a hook is not allowed. Consider moving the modification before calling the hook.
+
+  104 |             const alpha = 1.0 - (ddist / 10)
+  105 |             
+> 106 |             linePositions[lineIndex * 3] = p.x
+      |             ^^^^^^^^^^^^^ `linePositions` cannot be modified
+  107 |             linePositions[lineIndex * 3 + 1] = p.y + scrollOffset
+  108 |             linePositions[lineIndex * 3 + 2] = p.z
+  109 |             lineColors[lineIndex * 3] = lineColors[lineIndex * 3 + 1] = lineColors[lineIndex * 3 + 2] = 0.5 * alpha                                                           react-hooks/immutability
+  109:73  error  Error: This value cannot be modified
+
+Modifying a value previously passed as an argument to a hook is not allowed. Consider moving the modification before calling the hook.
+
+  107 |             linePositions[lineIndex * 3 + 1] = p.y + scrollOffset
+  108 |             linePositions[lineIndex * 3 + 2] = p.z
+> 109 |             lineColors[lineIndex * 3] = lineColors[lineIndex * 3 + 1] = lineColors[lineIndex * 3 + 2] = 0.5 * alpha
+      |                                                                         ^^^^^^^^^^ `lineColors` cannot be modified
+  110 |             lineIndex++
+  111 |
+  112 |             linePositions[lineIndex * 3] = p2.x                                      react-hooks/immutability
+
+C:\Users\admin\Desktop\Veltrix Labs\src\components\Portfolio.jsx
+    1:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  107:33  error  'idx' is defined but never used                                                no-unused-vars
+
+C:\Users\admin\Desktop\Veltrix Labs\src\components\ProductShowcase.jsx
+  1:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\admin\Desktop\Veltrix Labs\src\components\Services.jsx
+   1:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      no-unused-vars
+   5:30  error  'Icon' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   no-unused-vars
+  54:37  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  52 |       <div className="mt-8 flex items-center justify-between relative z-10">
+  53 |         <span className="text-[10px] font-black tracking-[0.4em] text-white/10 uppercase group-hover:text-[#ADFF2F]/20 transition-colors">
+> 54 |           Protocol // 0x{Math.floor(Math.random() * 999)}
+     |                                     ^^^^^^^^^^^^^ Cannot call impure function
+  55 |         </span>
+  56 |         <div className="w-8 h-[1px] bg-white/10 group-hover:bg-[#ADFF2F]/40 transition-colors" />
+  57 |       </div>  react-hooks/purity
+
+C:\Users\admin\Desktop\Veltrix Labs\src\components\Spotlight.jsx
+  1:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u    no-unused-vars
+  2:21  error  'useState' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\admin\Desktop\Veltrix Labs\src\components\Vision.jsx
+  1:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\admin\Desktop\Veltrix Labs\src\components\Waitlist.jsx
+  1:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+Γ£û 33 problems (33 errors, 0 warnings)
+

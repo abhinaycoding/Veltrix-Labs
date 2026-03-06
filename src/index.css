@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --glow: rgba(255, 255, 255, 0.1);
+  }
+
+  body {
+    @apply bg-black text-white selection:bg-white/30 selection:text-white;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  
+  .glass {
+    @apply bg-white/[0.03] backdrop-blur-xl border border-white/10;
+  }
+}
+
+@keyframes noise-move {
+  0% { transform: translate(0,0) }
+  10% { transform: translate(-5%,-5%) }
+  20% { transform: translate(-10%,5%) }
+  30% { transform: translate(5%,-10%) }
+  40% { transform: translate(-15%,15%) }
+  50% { transform: translate(-5%,10%) }
+  60% { transform: translate(15%,5%) }
+  70% { transform: translate(5%,15%) }
+  80% { transform: translate(5%,-5%) }
+  90% { transform: translate(-10%,5%) }
+  100% { transform: translate(0,0) }
+}
+
+@keyframes glitch-skew {
+  0% { transform: skew(0deg); }
+  20% { transform: skew(-1deg); }
+  40% { transform: skew(1deg); }
+  60% { transform: skew(-0.5deg); }
+  80% { transform: skew(0.5deg); }
+  100% { transform: skew(0deg); }
+}
+
+.animate-glitch-skew {
+  animation: glitch-skew 0.3s cubic-bezier(.25,.46,.45,.94) infinite;
+}
+
+.radial-glow {
+  background: radial-gradient(circle at center, var(--glow) 0%, transparent 70%);
+}
+
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(circle at center, black 0%, transparent 80%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.edge-mask {
+  position: fixed;
+  inset: 0;
+  box-shadow: inset 0 0 150px 50px black;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Clean Typography Elements */
+.text-shadow-glow {
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.4),
+    0 0 40px rgba(255, 255, 255, 0.2),
+    0 10px 10px rgba(0, 0, 0, 0.8);
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  animation: noise-shift 0.3s steps(3) infinite;
+}
+
+@keyframes noise-shift {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(1%, 1%); }
+  66% { transform: translate(-1%, -1%); }
+}
+
+.bg-scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 4px,
+    rgba(255, 255, 255, 0.03) 4px,
+    rgba(255, 255, 255, 0.03) 6px
+  );
+}
+
+/* Gooey Filter for Organic Logos */
+.gooey {
+  filter: url('#goo');
+}
+
+/* Ultra-Premium Navbar Utilities */
+@keyframes border-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-border-flow {
+  background-size: 200% 200%;
+  animation: border-flow 4s linear infinite;
+}
+
+.holographic-glow {
+  box-shadow: 
+    0 0 20px rgba(255, 255, 255, 0.05),
+    inset 0 0 10px rgba(255, 255, 255, 0.02);
+}
+
+.hud-bracket {
+  @apply opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100;
+}

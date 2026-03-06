@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import { Brain, Network, Zap, Shield, Cpu, LayoutTemplate } from 'lucide-react'
 import { siteContent } from '../data/content'
+import ServiceCard from './ServiceCard'
 
 const IconMap = {
   Brain: Brain,
@@ -44,9 +45,8 @@ export default function Services() {
           />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 perspective-[1000px]">
           {siteContent.services.items.map((service, index) => {
-            const Icon = IconMap[service.icon]
             return (
               <motion.div
                 key={index}
@@ -54,27 +54,12 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
-                className="group relative p-8 md:p-10 rounded-2xl glass border border-white/5 hover:border-[#ADFF2F]/50 transition-all duration-500 hover:-translate-y-2 hover:bg-white/[0.02]"
               >
-                {/* Number Indicator */}
-                <div className="absolute top-8 right-8 text-white/10 font-black text-2xl group-hover:text-[#ADFF2F]/20 transition-colors">
-                  0{index + 1}
-                </div>
-                
-                <div className="w-14 h-14 rounded-xl bg-white/5 mb-8 flex items-center justify-center border border-white/10 group-hover:border-[#ADFF2F]/30 transition-colors">
-                  {Icon && <Icon className="w-6 h-6 text-white/50 group-hover:text-[#ADFF2F] transition-colors" />}
-                </div>
-                
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-4 tracking-tight">
-                  {service.title}
-                </h3>
-                
-                <p className="text-white/40 text-sm md:text-base leading-relaxed font-light">
-                  {service.description}
-                </p>
-
-                {/* Hover line */}
-                <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#ADFF2F] group-hover:w-full transition-all duration-500 ease-out rounded-b-2xl" />
+                <ServiceCard 
+                  title={service.title}
+                  content={service.description}
+                  number={String(index + 1).padStart(2, '0')}
+                />
               </motion.div>
             )
           })}

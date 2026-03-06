@@ -6,8 +6,8 @@ export const siteContent = {
   },
   vision: {
     title: "The Vision",
-    headline: "Transforming <br />\n<span class='text-white/20 italic'>Ideas</span> into <br />\nDigital Reality",
-    description: "We merge high-performance technology with world-class design to help businesses scale, engage, and lead in a digital-first world.",
+    headline: "Architecting <br />\n<span class='text-white/20 italic'>Dominance</span> in <br />\nDigital Markets",
+    description: "We don't build generic solutions. We engineer high-performance technical foundations that give ambitious founders an unfair advantage.",
   },
   coreAnswers: {
     title: "The Essentials",
@@ -27,38 +27,38 @@ export const siteContent = {
     ]
   },
   services: {
-    title: "Our Specialties",
-    headline: "Solutions for your \n<span class='text-[#f35520] italic'>Success.</span>",
+    title: "Venture-Grade Systems",
+    headline: "Engineering for \n<span class='text-[#ADFF2F] italic'>Scale.</span>",
     items: [
       {
         icon: 'Brain',
-        title: "SMART INTERFACES",
-        description: "We design user-centric interfaces that are intuitive and beautiful, ensuring your customers stay engaged and satisfied."
+        title: "FLAWLESS UX",
+        description: "Zero-friction interface design that converts users into advocates. Premium aesthetics paired with clinical precision."
       },
       {
         icon: 'Network',
-        title: "CUSTOM SOFTWARE",
-        description: "Tailor-made infrastructure designed to grow with your business. Reliable, secure, and built for high performance."
+        title: "SCALABLE CORE",
+        description: "Bespoke infrastructure that scales linearly. Built for 1M+ users with zero performance degradation."
       },
       {
         icon: 'Zap',
-        title: "ENTERPRISE BACKENDS",
-        description: "Powerful server-side solutions that handle massive traffic with ease, ensuring your services are always lightning fast."
+        title: "HIGH-VELOCITY API",
+        description: "Ultra-low latency backend architectures. We optimize every millisecond for maximum execution speed."
       },
       {
         icon: 'Shield',
-        title: "DATA PROTECTION",
-        description: "Security is non-negotiable. We implement robust, military-grade protection to keep your business and customer data safe."
+        title: "SECURE ASSETS",
+        description: "Hardened security protocols. We protect your intellectual property and user data with zero-compromise engineering."
       },
       {
         icon: 'Cpu',
-        title: "AI & AUTOMATION",
-        description: "Streamline your operations with custom AI tools and smart automation that reduces costs and increases efficiency."
+        title: "AI INFRASTRUCTURE",
+        description: "Custom Large Language Model (LLM) integrations and automation pipelines that drive massive operational efficiency."
       },
       {
         icon: 'LayoutTemplate',
-        title: "IMPACTFUL DESIGN",
-        description: "Visual storytelling that defines your brand. We create immersive digital experiences that leave a lasting impression."
+        title: "STRATEGIC DESIGN",
+        description: "Visual identity systems that command respect. We build brands that look and feel like industry leaders from day one."
       }
     ]
   },
@@ -74,12 +74,12 @@ export const siteContent = {
   },
   innovation: {
     title: "The Edge",
-    headline: "Driven by <br class='hidden md:block' /> <span class='text-white/20 italic'>Results</span>",
-    description: "We utilize the latest technologies not just for the sake of it, but to deliver measurable growth and a competitive advantage for our clients.",
+    headline: "Obsessed with <br class='hidden md:block' /> <span class='text-white/20 italic'>Performance</span>",
+    description: "Technology is a weapon. We deploy the most advanced frameworks to ensure your venture outruns and out-executes the competition.",
     features: [
-      { icon: 'Cpu', label: 'MODERN TECH', desc: 'Using the most efficient frameworks for stability and speed.' },
-      { icon: 'Globe', label: 'RELIABLE CLOUD', desc: 'Global infrastructure that ensures your site is up 24/7.' },
-      { icon: 'Rocket', label: 'FAST DELIVERY', desc: 'Iterative development that gets your product to market faster.' }
+      { icon: 'Cpu', label: 'ELITE STACK', desc: 'Cutting-edge tech tailored for stability, security, and extreme speed.' },
+      { icon: 'Globe', label: 'EDGE NETWORK', desc: 'Globally distributed infrastructure ensuring sub-100ms response times.' },
+      { icon: 'Rocket', label: 'RAPID SHIP', desc: 'Aggressive development cycles that get you to market while others are still planning.' }
     ]
   },
   projects: [
@@ -88,11 +88,11 @@ export const siteContent = {
       title: "NoteNook",
       shortName: "NN.",
       category: "Featured Case Study",
-      headline: "The Art of <br />\n<span class='text-[#f35520] italic'>Productivity.</span>",
-      description: "NoteNook is a premium productivity platform designed for maximum focus. We helped them transition from a chaotic workspace to a clean, elegant ledger that users love.",
+      headline: "The Art of <br />\n<span class='text-[#ADFF2F] italic'>Productivity.</span>",
+      description: "NoteNook is a premium productivity platform designed for maximum focus. We helped them architect a zero-latency workspace that empowers elite teams globally.",
       link: "https://notenook-app.vercel.app/",
       ctaText: "VIEW CASE STUDY",
-      themeColor: "#f35520",
+      themeColor: "#ADFF2F",
       image: "src/assets/notenook.png",
       navLinks: ['CLIENTS', 'APPROACH', 'RESULTS']
     }

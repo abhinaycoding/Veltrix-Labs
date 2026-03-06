@@ -79,10 +79,10 @@ export default function AnimatedHeading({ text = "Launching Soon" }) {
             whileHover={{ 
               y: -8,
               scale: 1.05,
-              filter: 'drop-shadow(0 0 50px rgba(255,255,255,0.3))',
+              filter: 'drop-shadow(0 0 60px rgba(173,255,47,0.6))',
               transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
             }}
-            className="inline-block text-white"
+            className="inline-block bg-clip-text text-transparent bg-gradient-to-b from-white via-white/90 to-white/30 drop-shadow-2xl"
             style={{ 
               width: char === ' ' ? '0.3em' : 'auto',
               // Dynamic weight/spacing based on mouse proximity could go here

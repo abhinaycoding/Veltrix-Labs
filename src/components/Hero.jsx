@@ -60,8 +60,21 @@ export default function Hero({ onEnterClick }) {
           alt=""
           className="w-full h-full object-cover opacity-60"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/20 to-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black" />
       </div>
+
+      {/* Intense Center Neon Flare */}
+      <motion.div 
+        style={{ scale: scaleValue }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] md:w-[60vw] h-[120vw] md:h-[60vw] rounded-full opacity-30 pointer-events-none mix-blend-screen"
+        animate={{ 
+          opacity: [0.1, 0.3, 0.1],
+          scale: [0.9, 1.1, 0.9]
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#ADFF2F_0%,_transparent_60%)] blur-[80px]" />
+      </motion.div>
 
       {/* Soft Glow Ambient Background */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full -z-10 flex items-center justify-center">
@@ -82,7 +95,7 @@ export default function Hero({ onEnterClick }) {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.8 }}
-          className="text-white/60 text-sm md:text-xl font-light uppercase tracking-[0.3em] mt-6 text-center max-w-2xl leading-relaxed"
+          className="text-white text-base md:text-xl font-medium uppercase tracking-[0.3em] mt-8 text-center max-w-2xl leading-relaxed text-shadow-glow"
         >
           {siteContent.hero.subheadline}
         </motion.p>

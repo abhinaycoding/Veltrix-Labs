@@ -12,10 +12,13 @@ export default function CTAButton({ onClick, text = "Enter Veltrix" }) {
         className="relative group px-10 py-5 rounded-full glass border border-white/10 overflow-hidden interactive"
       >
         {/* Outer Halo on Hover */}
-        <div className="absolute inset-0 border border-white/20 rounded-full group-hover:border-white/40 transition-colors" />
+        <div className="absolute inset-0 border border-white/20 rounded-full group-hover:border-[#ADFF2F]/80 transition-colors duration-500" />
         
-        {/* Internal Glow Field */}
-        <div className="absolute inset-[-100%] bg-gradient-to-r from-transparent via-[#FFD700]/20 via-[#ADFF2F]/20 via-[#00CED1]/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 skew-x-12" />
+        {/* Deep Neon Glow */}
+        <div className="absolute inset-0 bg-[#ADFF2F] opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-full blur-md" />
+
+        {/* Internal Scanline */}
+        <div className="absolute inset-[-100%] bg-gradient-to-r from-transparent via-[#ADFF2F]/60 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12" />
 
         {/* Button Content */}
         <div className="relative flex items-center gap-3 z-10">

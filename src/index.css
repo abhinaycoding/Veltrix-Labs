@@ -140,7 +140,7 @@
 
 /* Isolated HUD Island Utilities */
 .island-glass {
-  @apply bg-white/[0.03] backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)];
+  @apply bg-white/[0.08] backdrop-blur-[32px] border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.6)];
 }
 
 .liquid-indicator {

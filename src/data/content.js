@@ -9,6 +9,23 @@ export const siteContent = {
     headline: "Transforming <br />\n<span class='text-white/20 italic'>Ideas</span> into <br />\nDigital Reality",
     description: "We merge high-performance technology with world-class design to help businesses scale, engage, and lead in a digital-first world.",
   },
+  coreAnswers: {
+    title: "The Essentials",
+    items: [
+      {
+        question: "What is Veltrix?",
+        answer: "We are an elite digital agency blending <span class='text-[#ADFF2F]'>world-class design</span> with high-performance engineering to build exceptional software for the next generation of startups."
+      },
+      {
+        question: "What do we build?",
+        answer: "From immersive web platforms and <span class='text-[#ADFF2F]'>smart interfaces</span> to custom enterprise software, we engineer full-stack solutions designed to scale."
+      },
+      {
+        question: "Why should you care?",
+        answer: "Because average fails. We deliver <span class='text-[#ADFF2F]'>speed, reliability, and precision</span>—equipping your business with the ultimate unfair advantage in a crowded market."
+      }
+    ]
+  },
   services: {
     title: "Our Specialties",
     headline: "Solutions for your \n<span class='text-[#f35520] italic'>Success.</span>",

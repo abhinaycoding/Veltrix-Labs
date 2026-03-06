@@ -12,6 +12,7 @@ import Innovation from '../components/Innovation'
 import Services from '../components/Services'
 import Manifesto from '../components/Manifesto'
 import Footer from '../components/Footer'
+import CoreAnswers from '../components/CoreAnswers'
 
 export default function Home() {
   const visionRef = useRef(null)
@@ -39,6 +40,8 @@ export default function Home() {
       <div className="relative z-10 flex flex-col">
         <Navbar />
         <Hero onEnterClick={scrollToVision} />
+        
+        <CoreAnswers />
         
         <div ref={visionRef}>
           <Vision />

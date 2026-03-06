@@ -12,7 +12,6 @@ import Innovation from '../components/Innovation'
 import Services from '../components/Services'
 import Manifesto from '../components/Manifesto'
 import Footer from '../components/Footer'
-import StickySection from '../components/StickySection'
 
 export default function Home() {
   const visionRef = useRef(null)
@@ -37,49 +36,19 @@ export default function Home() {
       <HUD />
 
       {/* Foreground Interactive Content */}
-      <div className="relative z-10 flex flex-col overflow-x-hidden">
+      <div className="relative z-10 flex flex-col">
         <Navbar />
+        <Hero onEnterClick={scrollToVision} />
         
-        {/* We use StickySection for the stacking effect. Hero is normal to allow organic scroll start. */}
-        <div className="relative z-20 bg-black">
-           <Hero onEnterClick={scrollToVision} />
+        <div ref={visionRef}>
+          <Vision />
         </div>
         
-        <div ref={visionRef} className="relative z-10">
-          <StickySection>
-            <div className="w-full h-full overflow-y-auto hide-scrollbar">
-              <Vision />
-            </div>
-          </StickySection>
-        </div>
-        
-        <StickySection>
-          <div className="w-full h-full overflow-y-auto hide-scrollbar bg-black/40 backdrop-blur-xl border-t border-white/5 rounded-t-[40px]">
-             <Services />
-          </div>
-        </StickySection>
-        
-        <StickySection>
-          <div className="w-full h-full overflow-y-auto hide-scrollbar bg-black/60 backdrop-blur-3xl border-t border-white/5 rounded-t-[40px]">
-             <Manifesto />
-          </div>
-        </StickySection>
-        
-        <StickySection>
-          <div className="w-full h-full overflow-y-auto hide-scrollbar bg-zinc-950 border-t border-white/5 rounded-t-[40px]">
-             <ProductShowcase />
-          </div>
-        </StickySection>
-        
-        <StickySection>
-          <div className="w-full h-full overflow-y-auto hide-scrollbar bg-black border-t border-white/5 rounded-t-[40px] shadow-[0_-20px_50px_rgba(0,0,0,0.8)]">
-             <Innovation />
-          </div>
-        </StickySection>
-        
-        <div className="relative z-50 bg-black rounded-t-[40px] pt-12 shadow-[0_-40px_100px_rgba(0,0,0,1)]">
-          <Footer />
-        </div>
+        <Services />
+        <Manifesto />
+        <ProductShowcase />
+        <Innovation />
+        <Footer />
       </div>
 
       {/* Interactive Cursor Layer */}

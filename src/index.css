@@ -128,17 +128,24 @@
   animation: border-flow 4s linear infinite;
 }
 
-.holographic-glow {
-  box-shadow: 
-    0 0 20px rgba(255, 255, 255, 0.05),
-    inset 0 0 10px rgba(255, 255, 255, 0.02);
+@keyframes scanline {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 0.5; }
+  100% { transform: translateY(100%); opacity: 0; }
 }
 
-.hud-bracket {
-  @apply opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100;
+.animate-scanline {
+  animation: scanline 3s linear infinite;
 }
 
-/* Isolated HUD Island Utilities */
+.meta-glass {
+  @apply backdrop-blur-[24px] border transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)];
+}
+
+.glow-follow {
+  background: radial-gradient(circle 100px at var(--x) var(--y), rgba(173, 255, 47, 0.15), transparent);
+}
+
 .island-glass {
   @apply bg-white/[0.08] backdrop-blur-[32px] border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.6)];
 }

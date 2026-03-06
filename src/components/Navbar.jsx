@@ -1,5 +1,5 @@
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
 import Magnetic from './Magnetic'
 import { Menu, X } from 'lucide-react'
 import logoImg from '../assets/logo_original_user.png'
@@ -7,20 +7,30 @@ import logoImg from '../assets/logo_original_user.png'
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [theme, setTheme] = useState('dark')
+  const [hoveredIndex, setHoveredIndex] = useState(null)
+  const navRef = useRef(null)
   const links = ['Products', 'About', 'Contact']
 
-  const [hoveredIndex, setHoveredIndex] = useState(null)
-  const [theme, setTheme] = useState('dark') // 'dark' or 'light'
+  // Mouse tracking for local glow effect
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
+      setIsScrolled(window.scrollY > 50)
     }
 
-    // Intersection Observer to detect section theme
+    const handleMouseMove = (e) => {
+      if (!navRef.current) return
+      const rect = navRef.current.getBoundingClientRect()
+      mouseX.set(e.clientX - rect.left)
+      mouseY.set(e.clientY - rect.top)
+    }
+
     const observerOptions = {
       threshold: [0, 0.1, 0.5, 0.9, 1],
-      rootMargin: "-20% 0% -79% 0%" // Slightly wider area to ensure detection as we scroll
+      rootMargin: "-20% 0% -79% 0%"
     }
 
     const observer = new IntersectionObserver((entries) => {
@@ -36,11 +46,19 @@ export default function Navbar() {
     sections.forEach((section) => observer.observe(section))
 
     window.addEventListener('scroll', handleScroll)
+    window.addEventListener('mousemove', handleMouseMove)
+
     return () => {
       window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('mousemove', handleMouseMove)
       sections.forEach((section) => observer.unobserve(section))
     }
-  }, [])
+  }, [mouseX, mouseY])
+
+  const glowStyle = {
+    '--x': `${mouseX.get()}px`,
+    '--y': `${mouseY.get()}px`,
+  }
 
   return (
     <>
@@ -50,149 +68,98 @@ export default function Navbar() {
         transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
         className="fixed top-0 left-0 w-full z-[100] px-6 py-8 flex justify-center pointer-events-none"
       >
-        <div className="max-w-7xl w-full flex items-center justify-between pointer-events-auto relative">
-          
-          {/* Island 1: The Brand Identity */}
-          <Magnetic strength={15}>
-            <motion.div 
-              animate={{ 
-                scale: isScrolled ? 1 : 1.1
-              }}
-              className={`island-glass rounded-full px-8 py-3 flex items-center h-16 w-48 relative overflow-hidden group/logo transition-all duration-500 ${
-                theme === 'light' 
-                  ? 'bg-black/[0.03] border-black/10 shadow-[0_8px_32px_rgba(0,0,0,0.1)]' 
-                  : 'bg-white/5 border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.6)]'
-              }`}
-            >
-              <img 
-                src={logoImg} 
-                alt="Veltrix Labs" 
-                className={`absolute inset-0 w-full h-full object-contain scale-[2] transition-all duration-500 group-hover/logo:scale-[2.1] ${
-                  theme === 'light' ? 'brightness-0 opacity-80' : 'mix-blend-screen brightness-150 group-hover/logo:brightness-200'
-                }`}
-              />
-            </motion.div>
+        <motion.div 
+          ref={navRef}
+          style={glowStyle}
+          animate={{ 
+            width: isScrolled ? 'auto' : '100%',
+            maxWidth: isScrolled ? '600px' : '1200px',
+            padding: isScrolled ? '8px 8px' : '12px 16px',
+            borderRadius: isScrolled ? '100px' : '24px',
+            backgroundColor: theme === 'light' 
+              ? (isScrolled ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.8)')
+              : (isScrolled ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.3)'),
+          }}
+          className={`meta-glass flex items-center justify-between pointer-events-auto relative overflow-hidden glow-follow group/nav shadow-2xl ${
+            theme === 'light' ? 'border-black/10' : 'border-white/10'
+          }`}
+        >
+          {/* Tactical Scanline */}
+          <div className={`absolute left-0 w-full h-20 bg-gradient-to-b from-transparent via-current to-transparent opacity-[0.03] pointer-events-none animate-scanline ${
+            theme === 'light' ? 'text-black' : 'text-white'
+          }`} />
+
+          {/* Logo Section */}
+          <Magnetic strength={10}>
+            <div className="flex items-center px-4 shrink-0 cursor-pointer">
+              <div className={`w-32 h-10 relative transition-all duration-500 ${isScrolled ? 'w-8 h-8 opacity-80' : 'w-32'}`}>
+                <img 
+                  src={logoImg} 
+                  alt="Veltrix" 
+                  className={`w-full h-full object-contain transition-all duration-500 ${
+                    theme === 'light' ? 'brightness-0' : 'mix-blend-screen brightness-150'
+                  }`}
+                />
+              </div>
+            </div>
           </Magnetic>
 
-          {/* Island 2: The Navigation Dock */}
-          <motion.div 
-            animate={{ 
-              backgroundColor: theme === 'light' 
-                ? (isScrolled ? 'rgba(0,0,0,0.03)' : 'rgba(0,0,0,0.01)')
-                : (isScrolled ? 'rgba(255,255,255,0.03)' : 'rgba(255,255,255,0.01)'),
-              padding: isScrolled ? '8px 12px' : '12px 24px',
-              scale: isScrolled ? 0.95 : 1
-            }}
-            className={`hidden md:flex island-glass rounded-[40px] relative items-center justify-center min-h-[64px] transition-all duration-500 ${
-              theme === 'light' 
-                ? 'border-black/10 shadow-[0_8px_32px_rgba(0,0,0,0.1)]' 
-                : 'border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.6)]'
-            }`}
-            onMouseLeave={() => setHoveredIndex(null)}
-          >
-            {/* Liquid Under-Indicator */}
-            <AnimatePresence>
-              {hoveredIndex !== null && (
-                <motion.div
-                  layoutId="liquid-nav"
-                  className={`liquid-indicator ${theme === 'light' ? 'bg-black/5' : 'bg-white/10'}`}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{ type: 'spring', damping: 20, stiffness: 250, mass: 0.5 }}
-                  style={{
-                    left: 12 + hoveredIndex * 140, // Precision alignment
-                    width: '130px',
-                    height: '40px'
-                  }}
-                />
-              )}
-            </AnimatePresence>
-
-            <div className="flex space-x-2 relative z-10">
+          {/* Navigation Items */}
+          <div className="hidden md:flex items-center px-2">
+            <div className="flex bg-black/5 dark:bg-white/5 rounded-full p-1 border border-current/5 backdrop-blur-sm">
               {links.map((link, i) => (
-                <div 
-                  key={link}
-                  className="w-[140px] flex justify-center"
-                  onMouseEnter={() => setHoveredIndex(i)}
-                >
-                  <Magnetic strength={20}>
-                    <motion.a
-                      href={`#${link.toLowerCase()}`}
-                      className="text-[10px] font-black tracking-[0.4em] uppercase py-3 transition-colors duration-500 transform"
-                      style={{ 
-                        color: hoveredIndex === i 
-                          ? (theme === 'light' ? '#000' : '#fff') 
-                          : (theme === 'light' ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.3)') 
-                      }}
-                    >
-                      {link}
-                    </motion.a>
-                  </Magnetic>
-                </div>
+                <Magnetic key={link} strength={15}>
+                  <a
+                    href={`#${link.toLowerCase()}`}
+                    onMouseEnter={() => setHoveredIndex(i)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    className={`relative px-6 py-2 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 rounded-full ${
+                      theme === 'light' 
+                        ? (hoveredIndex === i ? 'text-white bg-black' : 'text-black/40 hover:text-black')
+                        : (hoveredIndex === i ? 'text-black bg-white' : 'text-white/40 hover:text-white')
+                    }`}
+                  >
+                    {link}
+                  </a>
+                </Magnetic>
               ))}
             </div>
-          </motion.div>
-
-          {/* Island 3: The Action Station */}
-          <div className="flex items-center space-x-4">
-            <Magnetic strength={25}>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`hidden md:flex island-glass rounded-full px-10 py-4 text-[9px] font-black uppercase tracking-[0.3em] transition-all duration-500 group/cta relative overflow-hidden ${
-                  theme === 'light' 
-                    ? 'text-black border-black/10 hover:bg-black hover:text-white shadow-[0_8px_32px_rgba(0,0,0,0.1)]' 
-                    : 'text-white border-white/10 hover:bg-white hover:text-black shadow-[0_8px_32px_rgba(0,0,0,0.6)]'
-                }`}
-              >
-                <span className="relative z-10">Request Access</span>
-                {/* HUD Scanline */}
-                <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-current opacity-10 to-transparent -translate-x-full group-hover/cta:translate-x-full transition-transform duration-1000 ease-in-out`} />
-              </motion.button>
-            </Magnetic>
-
-            {/* Mobile Menu Trigger */}
-            <div 
-              className={`md:hidden island-glass p-5 rounded-full interactive cursor-pointer hover:scale-110 transition-all duration-500 ${
-                theme === 'light' 
-                  ? 'text-black border-black/10 shadow-[0_8px_32px_rgba(0,0,0,0.1)]' 
-                  : 'text-white border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.6)]'
-              }`}
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {isOpen ? <X size={20} /> : <Menu size={20} />}
-            </div>
           </div>
-        </div>
+
+          {/* CTA / Action */}
+          <div className="flex items-center px-2">
+            <button className={`flex items-center justify-center px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 ${
+              theme === 'light'
+                ? 'bg-black text-white hover:bg-black/80'
+                : 'bg-white text-black hover:bg-white/80'
+            } ${isScrolled ? 'px-4' : 'px-8'}`}>
+              <span className={isScrolled ? 'hidden lg:block' : 'block'}>Access</span>
+              <Menu className="md:hidden w-5 h-5 ml-0" onClick={() => setIsOpen(true)} />
+            </button>
+          </div>
+        </motion.div>
       </motion.nav>
 
-      {/* Bespoke Mobile Overlay */}
+      {/* Mobile Overlay */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-[200] bg-black/98 backdrop-blur-3xl md:hidden flex flex-col items-center justify-center"
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.1 }}
+            className="fixed inset-0 z-[200] bg-black/95 backdrop-blur-3xl md:hidden flex flex-col items-center justify-center"
           >
-            <div className="absolute top-12 right-12 p-4 cursor-pointer text-white" onClick={() => setIsOpen(false)}>
-              <X size={32} />
-            </div>
-            
+            <X size={32} className="absolute top-12 right-12 cursor-pointer text-white" onClick={() => setIsOpen(false)} />
             <div className="flex flex-col space-y-8 items-center">
               {links.map((link, i) => (
-                <motion.a
+                <a
                   key={link}
                   href={`#${link.toLowerCase()}`}
                   onClick={() => setIsOpen(false)}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.1 * i }}
-                  className="text-6xl font-black text-white/10 hover:text-white uppercase tracking-tighter transition-all hover:scale-110"
+                  className="text-5xl font-black text-white/20 hover:text-white uppercase tracking-tighter transition-all"
                 >
                   {link}
-                </motion.a>
+                </a>
               ))}
             </div>
           </motion.div>

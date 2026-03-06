@@ -16,13 +16,13 @@ export default function Manifesto() {
   return (
     <section 
       ref={containerRef}
-      className="min-h-screen relative w-full flex flex-col justify-center overflow-hidden bg-black text-white py-40 select-none border-t border-white/5"
+      className="min-h-screen relative w-full flex flex-col justify-center overflow-hidden bg-white text-black py-40 select-none"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 w-full mb-20 md:mb-40">
-        <span className="text-[10px] font-black tracking-[0.8em] text-white/30 uppercase block mb-12">
+        <span className="text-[10px] font-black tracking-[0.8em] text-black/40 uppercase block mb-12">
            {siteContent.manifesto.title}
         </span>
-        <p className="text-xl md:text-3xl lg:text-5xl font-bold leading-snug tracking-tight max-w-4xl text-white/90">
+        <p className="text-xl md:text-3xl lg:text-5xl font-bold leading-snug tracking-tight max-w-4xl text-black/80">
            {siteContent.manifesto.paragraph}
         </p>
       </div>
@@ -34,7 +34,7 @@ export default function Manifesto() {
         >
           {siteContent.manifesto.statements.map((statement, idx) => (
              <div key={idx} className="flex items-center space-x-12 md:space-x-32">
-                <h2 className="text-6xl md:text-[180px] font-black tracking-tighter uppercase text-white leading-none">
+                <h2 className="text-6xl md:text-[180px] font-black tracking-tighter uppercase text-black leading-none">
                   {statement}
                 </h2>
                 {/* Decorative Separator */}

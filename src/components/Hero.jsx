@@ -46,7 +46,7 @@ export default function Hero({ onEnterClick }) {
     >
       {/* Interactive Spline 3D Scene */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-black flex items-center justify-center">
-        <div className={`absolute inset-0 transition-opacity duration-1000 ${isSplineLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`absolute inset-0 transition-opacity duration-[2500ms] ${isSplineLoaded ? 'opacity-100' : 'opacity-0'}`}>
           <Spline 
             // Using an optimized, high-tech abstract particle/grid spline scene
             scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode"
@@ -112,14 +112,21 @@ export default function Hero({ onEnterClick }) {
            <div className="h-[1px] w-12 bg-white origin-left" />
         </motion.div>
 
-        {/* CTA Launch */}
+        {/* CTA Launch - Dual Action */}
         <motion.div
            initial={{ opacity: 0, y: 30, scale: 0.9 }}
            animate={{ opacity: 1, y: 0, scale: 1 }}
            transition={{ duration: 1.2, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
-           className="mt-16 z-20"
+           className="mt-16 z-20 flex flex-col sm:flex-row items-center gap-6"
         >
           <CTAButton onClick={onEnterClick} text={siteContent.hero.ctaText} />
+          
+          <button 
+            onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+            className="group flex items-center gap-3 px-8 py-5 rounded-full border border-white/20 text-white/70 hover:text-white hover:border-white/50 hover:bg-white/5 transition-all duration-300"
+          >
+            <span className="font-heading font-bold tracking-[0.2em] uppercase text-xs">Read Manifesto</span>
+          </button>
         </motion.div>
       </div>
 

@@ -51,12 +51,6 @@ export default function Vision() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
           
-          <div className="absolute bottom-8 left-8">
-            <div className="flex items-center space-x-3 text-white/40 font-mono text-[10px] uppercase tracking-widest">
-              <span className="w-2 h-2 bg-[#f35520] rounded-full animate-pulse" />
-              <span>Veltrix // Vision Protocol</span>
-            </div>
-          </div>
         </motion.div>
       </div>
     </section>

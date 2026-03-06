@@ -80,15 +80,10 @@ export default function Navbar() {
               ? (isScrolled ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.8)')
               : (isScrolled ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.3)'),
           }}
-          className={`meta-glass flex items-center justify-between pointer-events-auto relative overflow-hidden glow-follow group/nav shadow-2xl ${
+          className={`meta-glass flex items-center justify-between pointer-events-auto relative glow-follow group/nav shadow-2xl ${
             theme === 'light' ? 'border-black/10' : 'border-white/10'
           }`}
         >
-          {/* Tactical Scanline */}
-          <div className={`absolute left-0 w-full h-20 bg-gradient-to-b from-transparent via-current to-transparent opacity-[0.03] pointer-events-none animate-scanline ${
-            theme === 'light' ? 'text-black' : 'text-white'
-          }`} />
-
           {/* Logo Section */}
           <Magnetic strength={10}>
             <div className="flex items-center px-4 shrink-0 cursor-pointer">
@@ -113,10 +108,10 @@ export default function Navbar() {
                     href={`#${link.toLowerCase()}`}
                     onMouseEnter={() => setHoveredIndex(i)}
                     onMouseLeave={() => setHoveredIndex(null)}
-                    className={`relative px-6 py-2 text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 rounded-full ${
+                    className={`relative px-6 py-2 text-[11px] font-black uppercase tracking-[0.25em] transition-all duration-300 rounded-full ${
                       theme === 'light' 
-                        ? (hoveredIndex === i ? 'text-white bg-black' : 'text-black/40 hover:text-black')
-                        : (hoveredIndex === i ? 'text-black bg-white' : 'text-white/40 hover:text-white')
+                        ? (hoveredIndex === i ? 'text-white bg-black' : 'text-black/60 hover:text-black')
+                        : (hoveredIndex === i ? 'text-black bg-white' : 'text-white/60 hover:text-white')
                     }`}
                   >
                     {link}

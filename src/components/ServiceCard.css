@@ -63,24 +63,6 @@
   transform: translate3d(0px, 0px, 60px);
 }
 
-.content-box .see-more {
-  cursor: pointer;
-  margin-top: 1rem;
-  display: inline-block;
-  font-weight: 900;
-  font-size: 9px;
-  text-transform: uppercase;
-  color: #ADFF2F;
-  /* border-radius: 5px; */
-  background: #141414;
-  padding: 0.5rem 0.7rem;
-  transition: all 0.5s ease-in-out;
-  transform: translate3d(0px, 0px, 20px);
-}
-
-.content-box .see-more:hover {
-  transform: translate3d(0px, 0px, 60px);
-}
 
 .date-box {
   position: absolute;

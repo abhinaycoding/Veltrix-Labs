@@ -10,7 +10,6 @@ const ServiceCard = ({ title, content, number }) => {
           <p className="card-content">
             {content}
           </p>
-          <span className="see-more">See More</span>
         </div>
         <div className="date-box">
           <span className="month">NO.</span>

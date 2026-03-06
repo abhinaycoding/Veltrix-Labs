@@ -137,3 +137,12 @@
 .hud-bracket {
   @apply opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100;
 }
+
+/* Isolated HUD Island Utilities */
+.island-glass {
+  @apply bg-white/[0.03] backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)];
+}
+
+.liquid-indicator {
+  @apply absolute bg-white/10 rounded-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)];
+}

@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { motion } from 'framer-motion'
 import { Rocket, Cpu, Globe } from 'lucide-react'
 import { siteContent } from '../data/content'
 import innovationImg from '../assets/innovation.png'

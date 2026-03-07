@@ -1,5 +1,4 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import { Brain, Network, Zap, Shield, Cpu, LayoutTemplate } from 'lucide-react'
 import { siteContent } from '../data/content'

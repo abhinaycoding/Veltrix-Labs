@@ -34,7 +34,7 @@ const Contact = () => {
                 <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#ADFF2F]/3 rounded-full blur-[120px]" />
             </div>
 
-            <main className="pt-60 pb-32 px-6 relative z-10">
+            <main className="pt-32 sm:pt-48 md:pt-60 pb-32 px-6 relative z-10">
                 <div className="max-w-6xl mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-stretch">
                         {/* Executive Inquiry Section */}
@@ -48,10 +48,10 @@ const Contact = () => {
                             <div className="relative h-full p-8 md:p-16 rounded-[3rem] bg-white/90 backdrop-blur-3xl border border-zinc-200 shadow-2xl shadow-zinc-200/40">
                                 <div className="mb-12">
                                     <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-4 leading-none text-zinc-900">
-                                        Start a <br />
-                                        <span className="bg-gradient-to-r from-zinc-900 via-zinc-800 to-[#ADFF2F]/70 bg-clip-text text-transparent italic font-serif normal-case">Conversation.</span>
+                                        Build Your <br />
+                                        <span className="bg-gradient-to-r from-zinc-900 via-zinc-800 to-[#ADFF2F]/70 bg-clip-text text-transparent italic font-serif normal-case">Legacy.</span>
                                     </h1>
-                                    <p className="text-zinc-400 text-[10px] font-black uppercase tracking-[0.3em]">Tell us about your next big idea.</p>
+                                    <p className="text-zinc-400 text-[10px] font-black uppercase tracking-[0.3em]">Crafting refined digital experiences.</p>
                                 </div>
 
                                 <form 
@@ -143,9 +143,9 @@ const Contact = () => {
                                 className="flex-grow flex flex-col"
                             >
                                 <div className="p-12 rounded-[3rem] border border-zinc-200 bg-white/80 backdrop-blur-3xl flex-grow shadow-xl shadow-zinc-200/20">
-                                    <h3 className="text-2xl font-black tracking-tight mb-6 italic font-serif text-zinc-800">Get in Touch</h3>
+                                    <h3 className="text-2xl font-black tracking-tight mb-6 italic font-serif text-zinc-800">Let's Connect</h3>
                                     <p className="text-zinc-500 text-sm font-medium leading-relaxed mb-12 max-w-sm">
-                                        We're always looking for ambitious projects and visionary partners. Drop us a line.
+                                        We are always looking for ambitious projects and visionary partners. Tell us about your goals and how we can help.
                                     </p>
                                     
                                     <BentoCard 

@@ -8,7 +8,7 @@ import { BlendFunction } from 'postprocessing'
 
 const THEME_COLORS = ['#FFD700', '#ADFF2F', '#00CED1', '#1E90FF']
 
-const ConstellationParticles = ({ count = 120 }) => { // Reduced count for better performance
+const ConstellationParticles = ({ count = 80 }) => { // Reduced further for 60FPS
   const pointsRef = useRef()
   const linesRef = useRef()
   const { viewport, mouse } = useThree()

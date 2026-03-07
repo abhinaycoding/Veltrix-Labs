@@ -53,8 +53,9 @@ export default function CustomCursor() {
           y: innerSpringY,
           translateX: '-50%',
           translateY: '-50%',
+          willChange: 'transform',
         }}
-        className="fixed top-0 left-0 w-1.5 h-1.5 bg-white rounded-full z-[9999] pointer-events-none mix-blend-difference"
+        className="fixed top-0 left-0 w-1.5 h-1.5 bg-white rounded-full z-[9999] pointer-events-none opacity-80 shadow-[0_0_10px_rgba(255,255,255,0.5)]"
       />
       
       {/* Large Reacting Ring */}
@@ -64,14 +65,15 @@ export default function CustomCursor() {
           y: springY,
           translateX: '-50%',
           translateY: '-50%',
+          willChange: 'transform',
         }}
         animate={{
-          scale: isHovering ? 2 : 1,
-          opacity: isHovering ? 0.3 : 0.6,
-          borderWidth: isHovering ? '1px' : '2px',
+          scale: isHovering ? 1.5 : 1,
+          opacity: isHovering ? 0.4 : 0.2,
+          borderWidth: isHovering ? '1px' : '1px',
         }}
         transition={{ type: 'spring', ...springConfig }}
-        className="fixed top-0 left-0 w-8 h-8 border-white rounded-full z-[9998] pointer-events-none mix-blend-difference"
+        className="fixed top-0 left-0 w-8 h-8 border-white/40 rounded-full z-[9998] pointer-events-none"
       />
     </>
   )

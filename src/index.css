@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -25,6 +26,16 @@
   .glass {
     @apply bg-white/[0.03] backdrop-blur-xl border border-white/10;
   }
+
+  .animate-scroll-up-1 {
+    animation: scroll-up 25s linear infinite;
+  }
+  .animate-scroll-up-2 {
+    animation: scroll-up 30s linear infinite;
+  }
+  .animate-scroll-up-3 {
+    animation: scroll-up 20s linear infinite; 
+  }
 }
 
 @keyframes noise-move {
@@ -48,6 +59,15 @@
   60% { transform: skew(-0.5deg); }
   80% { transform: skew(0.5deg); }
   100% { transform: skew(0deg); }
+}
+
+@keyframes scroll-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
 }
 
 .animate-glitch-skew {
@@ -140,10 +160,17 @@
 
 .meta-glass {
   @apply backdrop-blur-[24px] border transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)];
+  will-change: transform, opacity;
 }
 
 .nav-glass {
   @apply backdrop-blur-[24px] border transition-none opacity-100;
+  will-change: transform, max-width, padding;
+}
+
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 1000px;
 }
 
 .glow-follow {

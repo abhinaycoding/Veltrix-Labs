@@ -45,10 +45,9 @@ export default function Hero({ onEnterClick }) {
       className="relative min-h-screen flex items-center justify-center select-none overflow-hidden"
     >
       {/* Interactive Spline 3D Scene */}
-      <div className="absolute inset-0 z-0 overflow-hidden bg-black flex items-center justify-center">
-        <div className={`absolute inset-0 transition-opacity duration-[2500ms] ${isSplineLoaded ? 'opacity-100' : 'opacity-0'}`}>
+      <div className="absolute inset-0 z-0 overflow-hidden bg-black flex items-center justify-center pointer-events-none">
+        <div style={{ willChange: 'opacity' }} className={`absolute inset-0 transition-opacity duration-[2500ms] ${isSplineLoaded ? 'opacity-100' : 'opacity-0'}`}>
           <Spline 
-            // Using an optimized, high-tech abstract particle/grid spline scene
             scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode"
             onLoad={() => setIsSplineLoaded(true)}
             className="w-full h-full object-cover scale-[1.05]"

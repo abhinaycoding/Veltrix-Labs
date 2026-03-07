@@ -13,7 +13,8 @@ import Services from '../components/Services'
 import Manifesto from '../components/Manifesto'
 import Footer from '../components/Footer'
 import CoreAnswers from '../components/CoreAnswers'
-import Plans from '../components/Plans'
+import FAQ from '../components/FAQ'
+import Testimonials from '../components/Testimonials'
 
 export default function Home() {
   const visionRef = useRef(null)
@@ -64,11 +65,14 @@ export default function Home() {
         </div>
 
         <div data-theme="dark">
-          <Innovation />
+          <Testimonials />
         </div>
 
         <div data-theme="dark">
-          <Plans />
+          <Innovation />
+        </div>
+        <div data-theme="dark">
+          <FAQ />
         </div>
         <Footer />
       </div>

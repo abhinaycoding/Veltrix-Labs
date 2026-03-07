@@ -40,7 +40,7 @@ export default function AnimatedHeading({ text = "VELTRIX", align = "center" }) 
     >
       <h1 className={`relative flex flex-wrap items-center gap-[0.02em] font-heading font-black text-[clamp(2.5rem,8vw,6.5rem)] tracking-tighter leading-[0.9] uppercase select-none ${alignmentClasses}`}>
         {characters.map((char, i) => (
-          <div key={i} className="relative overflow-hidden inline-block py-2">
+          <div key={i} className="relative overflow-hidden inline-block py-4 -my-4">
             <motion.span
               initial={{ 
                 y: "110%",
@@ -72,7 +72,7 @@ export default function AnimatedHeading({ text = "VELTRIX", align = "center" }) 
       <motion.div 
         className="absolute inset-0 z-[-1] pointer-events-none blur-[100px] opacity-20"
         style={{
-          background: `radial-gradient(circle at center, #C5A059 0%, transparent 60%)`,
+          background: `radial-gradient(circle at center, #ADFF2F 0%, transparent 60%)`,
           x: useTransform(mouseSpringX, x => x * 0.05),
           y: useTransform(mouseSpringY, y => y * 0.05),
         }}

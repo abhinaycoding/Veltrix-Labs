@@ -38,14 +38,14 @@ const Testimonials = () => {
         <section className="bg-black flex flex-col items-center justify-center py-32 px-6 font-['Geist'] overflow-hidden relative">
             {/* Background Glows */}
             <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#ADFF2F]/5 rounded-full blur-[150px] pointer-events-none" />
-            <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#ADFF2F]/5 rounded-full blur-[120px] pointer-events-none" />
 
             <div className="text-center mb-20 max-w-2xl relative z-10">
                 <span className="inline-block px-4 py-1.5 mb-6 text-[10px] font-black tracking-[0.3em] uppercase bg-white/5 border border-white/10 rounded-full text-[#ADFF2F]">
                     {testimonials.title}
                 </span>
                 <h2 className="text-4xl md:text-6xl font-black text-white mb-8 tracking-tighter leading-none uppercase">
-                    Our Partners <span className="text-metallic italic">Speaks</span>
+                    Our Partners <span className="text-metallic italic">Speak</span>
                 </h2>
                 <p className="text-white/30 text-sm md:text-base font-medium leading-relaxed">
                     {testimonials.description}

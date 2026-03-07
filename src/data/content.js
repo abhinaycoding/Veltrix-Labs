@@ -88,11 +88,11 @@ export const siteContent = {
       title: "NoteNook",
       shortName: "NN.",
       category: "Featured Case Study",
-      headline: "The Art of <br />\n<span class='text-[#f35520] italic'>Productivity.</span>",
+      headline: "The Art of <br />\n<span class='text-[#ADFF2F] italic'>Productivity.</span>",
       description: "NoteNook is a premium productivity platform designed for maximum focus. We helped them transition from a chaotic workspace to a clean, elegant ledger that users love.",
       link: "https://notenook-app.vercel.app/",
       ctaText: "VIEW CASE STUDY",
-      themeColor: "#f35520",
+      themeColor: "#ADFF2F",
       image: "src/assets/notenook.png",
       navLinks: ['CLIENTS', 'APPROACH', 'RESULTS']
     }

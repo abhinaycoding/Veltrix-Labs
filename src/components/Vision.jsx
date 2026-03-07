@@ -15,7 +15,7 @@ export default function Vision() {
           viewport={{ once: true }}
           transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="text-[10px] font-black tracking-[0.8em] text-[#f35520] uppercase mb-8 block">
+          <span className="text-[10px] font-black tracking-[0.8em] text-[#ADFF2F] uppercase mb-8 block">
              {vision.title}
           </span>
           <MaskedText>
@@ -36,7 +36,7 @@ export default function Vision() {
             whileInView={{ scaleX: 1, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="h-[1px] w-32 bg-[#f35520] mt-16 origin-left"
+            className="h-[1px] w-32 bg-[#ADFF2F] mt-16 origin-left"
           />
         </motion.div>
 

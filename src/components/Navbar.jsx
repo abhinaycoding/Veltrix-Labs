@@ -88,19 +88,19 @@ export default function Navbar() {
     }
   }, [mouseX, mouseY, location.pathname])
 
-  const background = useMotionTemplate`radial-gradient(120px circle at ${mouseX}px ${mouseY}px, rgba(197, 160, 89, 0.12), transparent)`
+  const background = useMotionTemplate`radial-gradient(120px circle at ${mouseX}px ${mouseY}px, rgba(173, 255, 47, 0.15), transparent)`
 
   return (
     <>
       <motion.nav 
-        className="fixed top-0 left-0 w-full z-[100] px-4 sm:px-6 py-4 sm:py-6 flex justify-center pointer-events-none"
+        className="fixed top-0 left-0 w-full z-[100] px-6 md:px-10 py-4 sm:py-6 flex justify-center pointer-events-none"
       >
         <motion.div 
           ref={navRef}
           style={{ willChange: 'transform, max-width, padding, background-color' }}
           animate={{ 
             width: '100%',
-            maxWidth: isScrolled ? '640px' : '100%',
+            maxWidth: isScrolled ? '640px' : '1280px',
             padding: isScrolled ? '10px 20px' : '14px 28px',
             backgroundColor: location.pathname === '/contact'
               ? 'rgba(0,0,0,0.95)'
@@ -127,7 +127,7 @@ export default function Navbar() {
           />
 
           {/* Logo */}
-          <Link to="/" className="flex items-center px-4 shrink-0 cursor-pointer relative z-10 transition-transform hover:scale-105 active:scale-95">
+          <Link to="/" className="flex items-center shrink-0 cursor-pointer relative z-10 transition-transform hover:scale-105 active:scale-95">
              <span className={`text-xl font-black uppercase tracking-tighter ${
                 theme === 'light' ? 'text-black' : 'text-white'
               }`}>
@@ -142,7 +142,7 @@ export default function Navbar() {
                 onClick={() => setIsOpen(!isOpen)}
                 aria-label="Toggle menu"
                 className={`flex flex-col items-center justify-center gap-[5px] rounded-full shadow-lg transition-all duration-300 hover:scale-[1.1] active:scale-[0.95] ${
-                   theme === 'light' ? 'bg-black text-white' : 'bg-[#C5A059] text-black'
+                   theme === 'light' ? 'bg-black text-white' : 'bg-[#ADFF2F] text-black'
                 } ${isScrolled ? 'w-10 h-10' : 'w-11 h-11'}`}
               >
                 <motion.span
@@ -186,12 +186,12 @@ export default function Navbar() {
               className="fixed top-0 right-0 h-full w-full max-w-[320px] sm:max-w-sm z-[200] bg-[#0a0a0a] border-l border-white/5 flex flex-col overflow-hidden shadow-[-20px_0_60px_rgba(0,0,0,0.8)]"
             >
               {/* Inner glow */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-[#C5A059]/5 rounded-full blur-[100px] pointer-events-none" />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[#ADFF2F]/5 rounded-full blur-[100px] pointer-events-none" />
 
               {/* Header */}
               <div className="flex items-center justify-between px-8 pt-12 pb-8 border-b border-white/5">
                 <div>
-                  <div className="font-serif italic text-xs tracking-[0.2em] text-[#C5A059] mb-1">Navigation</div>
+                  <div className="font-serif italic text-xs tracking-[0.2em] text-[#ADFF2F] mb-1">Navigation</div>
                   <div className="text-white font-black text-2xl tracking-tighter">VELTRIX</div>
                 </div>
                 <button
@@ -215,15 +215,15 @@ export default function Navbar() {
                     <Link
                       to={link.path}
                       onClick={() => setIsOpen(false)}
-                      className="group flex items-center justify-between py-6 border-b border-white/5 hover:border-[#C5A059]/20 transition-all duration-300"
+                      className="group flex items-center justify-between py-6 border-b border-white/5 hover:border-[#ADFF2F]/20 transition-all duration-300"
                     >
                       <div className="flex items-center gap-6">
-                        <span className="text-[11px] text-[#C5A059]/40 font-bold tabular-nums tracking-widest group-hover:text-[#C5A059] transition-colors">{link.num}</span>
+                        <span className="text-[11px] text-[#ADFF2F]/40 font-bold tabular-nums tracking-widest group-hover:text-[#ADFF2F] transition-colors">{link.num}</span>
                         <span className="text-3xl sm:text-4xl font-black uppercase tracking-tighter text-white group-hover:pl-2 transition-all duration-500">
                           {link.name}
                         </span>
                       </div>
-                      <ArrowUpRight className="w-5 h-5 text-white/5 group-hover:text-[#C5A059] -translate-x-2 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                      <ArrowUpRight className="w-5 h-5 text-white/5 group-hover:text-[#ADFF2F] -translate-x-2 group-hover:translate-x-0 opacity-0 group-hover:opacity-100 transition-all duration-300" />
                     </Link>
                   </motion.div>
                 ))}
@@ -236,19 +236,13 @@ export default function Navbar() {
                 transition={{ delay: 0.5 }}
                 className="px-8 py-10 border-t border-white/5 space-y-4 bg-black/40"
               >
-                <div className="font-serif italic text-xs text-[#C5A059]/60 tracking-[0.1em]">Institutional Support</div>
+                <div className="font-serif italic text-xs text-[#ADFF2F]/60 tracking-[0.1em]">Institutional Support</div>
                 <a
                   href="mailto:hello@veltrix.com"
                   className="text-white/60 hover:text-white transition-colors font-bold text-lg block tracking-tight"
                 >
                   hello@veltrix.com
                 </a>
-                <div className="flex gap-3 pt-2">
-                  <div className="px-4 py-2 rounded-full bg-[#C5A059]/10 border border-[#C5A059]/20 text-[10px] text-[#C5A059] font-black uppercase tracking-widest flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-[#C5A059] rounded-full animate-pulse" />
-                    Network Active
-                  </div>
-                </div>
               </motion.div>
             </motion.div>
           </>

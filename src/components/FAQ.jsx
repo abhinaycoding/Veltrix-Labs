@@ -101,7 +101,7 @@ const FAQ = () => {
         <section className="relative py-32 overflow-hidden bg-black flex flex-col items-center">
             {/* Atmospheric Glows */}
             <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#ADFF2F]/5 rounded-full blur-[150px] pointer-events-none" />
-            <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#ADFF2F]/5 rounded-full blur-[120px] pointer-events-none" />
 
             <div className="container px-6 relative z-10 max-w-4xl">
                 <motion.div 

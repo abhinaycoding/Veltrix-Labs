@@ -15,7 +15,7 @@ export default function CoreAnswers() {
   return (
     <section 
       ref={containerRef}
-      className="relative z-10 w-full bg-black py-24 md:py-40 px-6 md:px-12 overflow-hidden border-t border-white/5"
+      className="relative z-10 w-full bg-black py-20 px-6 md:px-12 overflow-hidden border-t border-white/5"
     >
       {/* Huge Background Text */}
       <motion.div 

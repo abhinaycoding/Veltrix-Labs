@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { siteContent } from '../data/content'
 import visionImg from '../assets/vision.png'
 import MaskedText from './MaskedText'

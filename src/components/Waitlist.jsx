@@ -12,7 +12,7 @@ export default function Waitlist() {
     setStatus('submitting')
     
     try {
-      const response = await fetch('https://formspree.io/veltrixlabs.io@gmail.com', {
+      const response = await fetch('https://formspree.io/f/xlgpeplq', {
         method: 'POST',
         body: JSON.stringify({ 
           email: email,

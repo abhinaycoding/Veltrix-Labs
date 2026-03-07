@@ -5,131 +5,126 @@ import MaskedText from './MaskedText'
 import { useRef, useEffect, useState } from 'react'
 import { siteContent } from '../data/content'
 import Spline from '@splinetool/react-spline'
+import { ArrowUpRight } from 'lucide-react'
 
 export default function Hero({ onEnterClick }) {
   const ref = useRef(null)
-  
-  // Mouse position tracking for parallax
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-
-  // Spring smoothing for parallax
-  const springConfig = { damping: 50, stiffness: 300 }
-  const smoothMouseX = useSpring(mouseX, springConfig)
-  const smoothMouseY = useSpring(mouseY, springConfig)
-
-  // Background Parallax Transforms (Mouse only)
-  const bgX = useTransform(smoothMouseX, [-800, 800], [20, -20])
-  const bgY = useTransform(smoothMouseY, [-400, 400], [20, -20])
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      const { clientX, clientY } = e
-      const { innerWidth, innerHeight } = window
-      const x = clientX - innerWidth / 2
-      const y = clientY - innerHeight / 2
-      mouseX.set(x)
-      mouseY.set(y)
-    }
-
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [mouseX, mouseY])
-
-  // Spline loading state to ensure smooth transitions
   const [isSplineLoaded, setIsSplineLoaded] = useState(false)
 
   return (
     <section 
       ref={ref}
-      style={{ position: 'relative' }}
-      className="relative min-h-screen flex items-center justify-center select-none overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-start pt-32 md:pt-48 select-none overflow-hidden bg-black"
     >
-      {/* Interactive Spline 3D Scene */}
-      <div className="absolute inset-0 z-0 overflow-hidden bg-black flex items-center justify-center pointer-events-none">
-        <div style={{ willChange: 'opacity' }} className={`absolute inset-0 transition-opacity duration-[2500ms] ${isSplineLoaded ? 'opacity-100' : 'opacity-0'}`}>
-          <Spline 
-            scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode"
-            onLoad={() => setIsSplineLoaded(true)}
-            className="w-full h-full object-cover scale-[1.05]"
-          />
-        </div>
-        
-        {/* Fallback/Loader State */}
-        {!isSplineLoaded && (
-          <div className="absolute inset-0 flex items-center justify-center">
-             <div className="w-12 h-12 border-t border-[#ADFF2F] rounded-full animate-spin opacity-50" />
-          </div>
-        )}
-        
-        {/* Vignette Overlay to ensure text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/20 to-black pointer-events-none" />
-      </div>
+      {/* Background Glows */}
+      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#C5A059]/10 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-[10%] right-[-10%] w-[40%] h-[40%] bg-white/5 blur-[150px] rounded-full pointer-events-none" />
 
-      {/* Intense Center Neon Flare */}
-      <motion.div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] md:w-[60vw] h-[120vw] md:h-[60vw] rounded-full opacity-30 pointer-events-none mix-blend-screen"
-        animate={{ 
-          opacity: [0.1, 0.3, 0.1],
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#ADFF2F_0%,_transparent_60%)] blur-[80px]" />
-      </motion.div>
-
-      {/* Soft Glow Ambient Background */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full -z-10 flex items-center justify-center">
-        <div className="w-[800px] h-[800px] radial-glow opacity-10 animate-pulse transition-opacity duration-1000" />
-      </div>
-
-      <div 
-        className="max-w-7xl mx-auto px-8 flex flex-col items-center text-center relative z-10"
-      >
-        {/* Cinematic Headline - Agency Brand */}
-        <div className="mb-0 relative flex justify-center w-full z-20 flex-col items-center">
-           <AnimatedHeading text={siteContent.hero.headline} />
-        </div>
-
-        {/* Subheadline */}
-        <MaskedText delay={0.8}>
-          <p className="text-white text-base md:text-xl font-medium uppercase tracking-[0.3em] mt-8 text-center max-w-2xl leading-relaxed text-shadow-glow">
-            {siteContent.hero.subheadline}
-          </p>
-        </MaskedText>
-
-        {/* Tactical Interface Lines */}
-        <motion.div 
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 0.2 }}
-          transition={{ duration: 1.5, delay: 1, ease: "easeOut" }}
-          className="mt-4 flex items-center space-x-4"
-        >
-           <div className="h-[1px] w-12 bg-white origin-right" />
-           <div className="w-1.5 h-1.5 border border-white rotate-45" />
-           <div className="h-[1px] w-12 bg-white origin-left" />
-        </motion.div>
-
-        {/* CTA Launch - Dual Action */}
-        <motion.div
-           initial={{ opacity: 0, y: 30, scale: 0.9 }}
-           animate={{ opacity: 1, y: 0, scale: 1 }}
-           transition={{ duration: 1.2, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
-           className="mt-16 z-20 flex flex-col sm:flex-row items-center gap-6"
-        >
-          <CTAButton onClick={onEnterClick} text={siteContent.hero.ctaText} />
+      <div className="max-w-7xl mx-auto px-6 md:px-10 w-full relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           
-          <button 
-            onClick={() => document.getElementById('manifesto')?.scrollIntoView({ behavior: 'smooth' })}
-            className="group flex items-center gap-3 px-8 py-5 rounded-full border border-white/20 text-white/70 hover:text-white hover:border-white/50 hover:bg-white/5 transition-all duration-300"
+          {/* Left Content */}
+          <div className="flex flex-col items-start text-left">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
+              className="mb-8 flex items-center gap-3 text-[10px] md:text-xs font-black tracking-[0.4em] uppercase text-[#C5A059]"
+            >
+              <div className="w-6 h-6 rounded-full border border-[#C5A059]/30 flex items-center justify-center">
+                <div className="w-1.5 h-1.5 bg-[#C5A059] rounded-full animate-pulse" />
+              </div>
+              <span>Engineering the Future // Est. 2024</span>
+            </motion.div>
+
+            <div className="relative">
+               <AnimatedHeading text={siteContent.hero.headline} align="left" />
+            </div>
+
+            <MaskedText delay={0.8}>
+              <p className="font-serif italic text-white/70 text-2xl md:text-3xl tracking-wide mt-6 max-w-xl leading-snug">
+                {siteContent.hero.subheadline}
+              </p>
+            </MaskedText>
+
+            <motion.div
+               initial={{ opacity: 0, y: 20 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 1, delay: 1.2 }}
+               className="mt-12 flex flex-col sm:flex-row items-center gap-8"
+            >
+              <CTAButton onClick={onEnterClick} text={siteContent.hero.ctaText} />
+              <button 
+                onClick={() => document.getElementById('manifesto')?.scrollIntoView({ behavior: 'smooth' })}
+                className="group flex items-center gap-4 text-white/40 hover:text-white transition-all duration-300"
+              >
+                <span className="font-heading font-black tracking-[0.3em] uppercase text-[10px]">PHILOSOPHY</span>
+                <ArrowUpRight className="w-4 h-4 text-[#C5A059] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              </button>
+            </motion.div>
+          </div>
+
+          {/* Right Content - Visual Focal Point */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }}
+            className="relative w-full aspect-square lg:aspect-auto lg:h-[600px] flex items-center justify-center pointer-events-none"
           >
-            <span className="font-heading font-bold tracking-[0.2em] uppercase text-xs">READ MANIFESTO</span>
-          </button>
+            <div className="absolute inset-0 z-0 bg-black flex items-center justify-center overflow-hidden rounded-[40px]">
+              <div style={{ willChange: 'opacity' }} className={`absolute inset-0 transition-opacity duration-[2500ms] ${isSplineLoaded ? 'opacity-30' : 'opacity-0'}`}>
+                <Spline 
+                  scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode"
+                  onLoad={() => setIsSplineLoaded(true)}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {!isSplineLoaded && (
+                <div className="w-10 h-10 border-t border-[#C5A059] rounded-full animate-spin opacity-30" />
+              )}
+            </div>
+            {/* Visual Frame Decor */}
+            <div className="absolute -inset-4 border border-white/5 rounded-[60px] pointer-events-none" />
+          </motion.div>
+        </div>
+
+        {/* Global Operations Indicator */}
+        <motion.div
+           initial={{ opacity: 0 }}
+           animate={{ opacity: 0.4 }}
+           transition={{ delay: 2 }}
+           className="mt-24 mb-12 flex items-center gap-4"
+        >
+           <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-white/10" />
+           <p className="text-[9px] font-black tracking-[0.8em] uppercase text-white/40">VELTRIX LABS // GLOBAL OPERATIONS</p>
+           <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-white/10" />
+        </motion.div>
+
+        {/* Browser Preview Window */}
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.5, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
+          className="preview-window w-full aspect-[16/9] md:aspect-[21/9] lg:aspect-[21/7] max-w-6xl mx-auto"
+        >
+          <div className="preview-header">
+            <div className="preview-dot bg-red-500/30" />
+            <div className="preview-dot bg-yellow-500/30" />
+            <div className="preview-dot bg-green-500/30" />
+            <div className="ml-4 h-4 w-32 bg-white/5 rounded-full" />
+          </div>
+          <div className="p-8 md:p-12 h-full flex items-center justify-center">
+             <div className="grid grid-cols-3 gap-8 w-full opacity-30 grayscale pointer-events-none">
+                <div className="h-32 bg-white/5 rounded-xl animate-pulse" />
+                <div className="h-32 bg-white/5 rounded-xl animate-pulse delay-75" />
+                <div className="h-32 bg-white/5 rounded-xl animate-pulse delay-150" />
+             </div>
+          </div>
         </motion.div>
       </div>
-
-      {/* Decorative Animated Lines */}
-      <div className="absolute bottom-16 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/5 to-transparent z-10" />
-      <div className="absolute top-1/2 left-0 w-[1px] h-32 bg-gradient-to-b from-transparent via-white/10 to-transparent z-10 animate-pulse" />
+    </section>
+  )
+}
     </section>
   )
 }

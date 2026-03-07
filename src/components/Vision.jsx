@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion'
 import { siteContent } from '../data/content'
 import visionImg from '../assets/vision.png'
+import MaskedText from './MaskedText'
 
 export default function Vision() {
   const { vision } = siteContent
@@ -17,10 +17,12 @@ export default function Vision() {
           <span className="text-[10px] font-black tracking-[0.8em] text-[#f35520] uppercase mb-8 block">
              {vision.title}
           </span>
-          <h2 
-            className="text-4xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-12"
-            dangerouslySetInnerHTML={{ __html: vision.headline }}
-          />
+          <MaskedText>
+            <h2 
+              className="text-4xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-12"
+              dangerouslySetInnerHTML={{ __html: vision.headline }}
+            />
+          </MaskedText>
           
           <div className="max-w-2xl">
             <p className="text-lg md:text-xl text-white/50 font-light leading-relaxed uppercase tracking-widest">

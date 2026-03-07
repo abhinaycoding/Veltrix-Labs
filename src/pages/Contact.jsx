@@ -19,15 +19,77 @@ const BentoCard = ({ title, content, icon: Icon, delay = 0 }) => (
 );
 
 const Contact = () => {
-    const [focusedField, setFocusedField] = useState(null);
+    const [status, setStatus] = useState('idle'); // idle, submitting, success, error
 
     const handleSubmit = async (e) => {
-        setFocusedField(null); // Just clear focus on submit
-        // Native Formspree submission handles the rest
+        e.preventDefault();
+        setFocusedField(null);
+        setStatus('submitting');
+        
+        try {
+            const formData = new FormData(e.target);
+            const response = await fetch(e.target.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                setStatus('success');
+                e.target.reset();
+            } else {
+                setStatus('error');
+            }
+        } catch (error) {
+            setStatus('error');
+        }
     };
 
     return (
         <div data-theme="light" className="bg-[#F1F1F3] min-h-screen text-zinc-800 selection:bg-[#ADFF2F]/40 selection:text-zinc-800 font-sans overflow-x-hidden relative">
+            {/* Success Overlay */}
+            <AnimatePresence>
+                {status === 'success' && (
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] bg-white/90 backdrop-blur-3xl flex items-center justify-center p-6 text-center"
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                            className="max-w-md w-full"
+                        >
+                            <div className="size-24 bg-[#ADFF2F]/10 rounded-[2.5rem] border border-[#ADFF2F]/20 flex items-center justify-center mx-auto mb-10 overflow-hidden relative group">
+                                <motion.div 
+                                    initial={{ scale: 0 }}
+                                    animate={{ scale: 1.5 }}
+                                    className="absolute inset-0 bg-[#ADFF2F]/5 blur-xl"
+                                />
+                                <CheckCircle2 className="w-10 h-10 text-[#ADFF2F] relative z-10" />
+                            </div>
+                            <h2 className="text-4xl font-black uppercase tracking-tighter text-zinc-900 mb-6 leading-none">
+                                Transmission <br />
+                                <span className="italic font-serif normal-case bg-gradient-to-r from-zinc-900 to-[#ADFF2F] bg-clip-text text-transparent">Complete.</span>
+                            </h2>
+                            <p className="text-zinc-500 font-medium mb-12 leading-relaxed">
+                                Your inquiry has been secured. Our team will initiate contact via the provided channel shortly.
+                            </p>
+                            <button 
+                                onClick={() => setStatus('idle')}
+                                className="w-full bg-zinc-900 text-white font-black uppercase tracking-[0.4em] text-[10px] py-6 rounded-2xl hover:bg-black transition-all"
+                            >
+                                Return to Portal
+                            </button>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             {/* Soft Atmospheric Radiant Glows */}
             <div className="fixed inset-0 pointer-events-none overflow-hidden">
                 <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#ADFF2F]/5 rounded-full blur-[150px] animate-pulse" />
@@ -120,16 +182,27 @@ const Contact = () => {
 
                                     <button 
                                         type="submit"
-                                        className="w-full group relative overflow-hidden bg-zinc-900 border border-zinc-800 text-white font-black uppercase tracking-[0.5em] py-7 rounded-2xl transition-all duration-500 hover:scale-[1.01] active:scale-[0.99] hover:bg-black hover:shadow-2xl hover:shadow-[#ADFF2F]/20 text-[11px]"
+                                        disabled={status === 'submitting'}
+                                        className="w-full group relative overflow-hidden bg-zinc-900 border border-zinc-800 text-white font-black uppercase tracking-[0.5em] py-7 rounded-2xl transition-all duration-500 hover:scale-[1.01] active:scale-[0.99] hover:bg-black hover:shadow-2xl hover:shadow-[#ADFF2F]/20 text-[11px] disabled:opacity-50"
                                     >
                                         <input type="hidden" name="_next" value="http://localhost:5173/contact" />
                                         <input type="hidden" name="_captcha" value="false" />
                                         <div className="absolute inset-[-100%] bg-gradient-to-r from-transparent via-[#ADFF2F]/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 skew-x-12"></div>
                                         <span className="relative z-10 flex items-center justify-center gap-4">
-                                            Send Message
-                                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
+                                            {status === 'submitting' ? (
+                                                <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} className="w-5 h-5 border-2 border-[#ADFF2F] border-t-transparent rounded-full" />
+                                            ) : (
+                                                <>
+                                                    Send Message
+                                                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
+                                                </>
+                                            )}
                                         </span>
                                     </button>
+                                    
+                                    {status === 'error' && (
+                                        <p className="text-red-500 text-[10px] font-black uppercase tracking-widest text-center">Transmission Error. Please retry or contact hello@veltrix.com directly.</p>
+                                    )}
                                 </form>
                             </div>
                         </motion.div>

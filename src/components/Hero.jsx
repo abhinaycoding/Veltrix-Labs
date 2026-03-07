@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
-import AnimatedHeading from './AnimatedHeading'
 import CTAButton from './CTAButton'
+import MaskedText from './MaskedText'
 import { useRef, useEffect, useState } from 'react'
 import { siteContent } from '../data/content'
 import Spline from '@splinetool/react-spline'
@@ -90,14 +90,11 @@ export default function Hero({ onEnterClick }) {
         </div>
 
         {/* Subheadline */}
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="text-white text-base md:text-xl font-medium uppercase tracking-[0.3em] mt-8 text-center max-w-2xl leading-relaxed text-shadow-glow"
-        >
-          {siteContent.hero.subheadline}
-        </motion.p>
+        <MaskedText delay={0.8}>
+          <p className="text-white text-base md:text-xl font-medium uppercase tracking-[0.3em] mt-8 text-center max-w-2xl leading-relaxed text-shadow-glow">
+            {siteContent.hero.subheadline}
+          </p>
+        </MaskedText>
 
         {/* Tactical Interface Lines */}
         <motion.div 

@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion'
 import { Rocket, Cpu, Globe } from 'lucide-react'
 import { siteContent } from '../data/content'
-
 import innovationImg from '../assets/innovation.png'
+import MaskedText from './MaskedText'
 
 // Mapping string names to actual Lucide component imports
 const IconMap = {
@@ -27,10 +27,12 @@ export default function Innovation() {
           <span className="text-[10px] font-black tracking-[0.8em] text-[#ADFF2F] uppercase mb-4 block">
              {innovation.title}
           </span>
-          <h2 
-            className="text-4xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-8 md:mb-10 w-full break-words"
-            dangerouslySetInnerHTML={{ __html: innovation.headline }}
-          />
+          <MaskedText>
+            <h2 
+              className="text-4xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-8 md:mb-10 w-full break-words"
+              dangerouslySetInnerHTML={{ __html: innovation.headline }}
+            />
+          </MaskedText>
           <p className="text-white/50 text-base md:text-lg font-light leading-relaxed uppercase tracking-widest mb-12">
              {innovation.description}
           </p>

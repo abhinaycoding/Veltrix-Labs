@@ -3,6 +3,7 @@ import { useRef } from 'react'
 import { Brain, Network, Zap, Shield, Cpu, LayoutTemplate } from 'lucide-react'
 import { siteContent } from '../data/content'
 import ServiceCard from './ServiceCard'
+import MaskedText from './MaskedText'
 
 const IconMap = {
   Brain: Brain,
@@ -39,10 +40,12 @@ export default function Services() {
           <span className="text-[10px] font-black tracking-[0.8em] text-[#ADFF2F] uppercase mb-6 block">
              {siteContent.services.title}
           </span>
-          <h2 
-            className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter leading-[0.9]"
-            dangerouslySetInnerHTML={{ __html: siteContent.services.headline }}
-          />
+          <MaskedText>
+            <h2 
+              className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter leading-[0.9]"
+              dangerouslySetInnerHTML={{ __html: siteContent.services.headline }}
+            />
+          </MaskedText>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 perspective-[1000px]">

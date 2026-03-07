@@ -20,6 +20,7 @@ const BentoCard = ({ title, content, icon: Icon, delay = 0 }) => (
 
 const Contact = () => {
     const [status, setStatus] = useState('idle'); // idle, submitting, success, error
+    const [focusedField, setFocusedField] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

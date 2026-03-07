@@ -1,4 +1,5 @@
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
+import AnimatedHeading from './AnimatedHeading'
 import CTAButton from './CTAButton'
 import MaskedText from './MaskedText'
 import { useRef, useEffect, useState } from 'react'

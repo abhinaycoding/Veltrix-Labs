@@ -12,15 +12,15 @@ export default function Waitlist() {
     setStatus('submitting')
     
     try {
-      const formData = new FormData();
-      formData.append('email', email);
-      formData.append('_subject', 'New Waitlist Enrollment');
-      
       const response = await fetch('https://formspree.io/veltrixlabs.io@gmail.com', {
         method: 'POST',
-        body: formData,
+        body: JSON.stringify({ 
+          email: email,
+          _subject: 'New Waitlist Enrollment'
+        }),
         headers: {
-          'Accept': 'application/json'
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
         }
       });
       
@@ -28,10 +28,12 @@ export default function Waitlist() {
         setStatus('success')
         setEmail('')
       } else {
+        const err = await response.json();
+        console.error('Waitlist Error:', err);
         setStatus('idle')
       }
     } catch (error) {
-      console.error('Waitlist Error:', error)
+      console.error('Waitlist Fetch Error:', error)
       setStatus('idle')
     }
   }

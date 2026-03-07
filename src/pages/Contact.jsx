@@ -28,22 +28,33 @@ const Contact = () => {
         setStatus('submitting');
         
         try {
-            const formData = new FormData(e.target);
-            const response = await fetch(e.target.action, {
+            const form = e.target;
+            const data = {
+                name: form.name.value,
+                email: form.email.value,
+                message: form.message.value,
+                _captcha: "false"
+            };
+
+            const response = await fetch(form.action, {
                 method: 'POST',
-                body: formData,
+                body: JSON.stringify(data),
                 headers: {
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 }
             });
             
             if (response.ok) {
                 setStatus('success');
-                e.target.reset();
+                form.reset();
             } else {
+                const errorData = await response.json();
+                console.error('Formspree Error:', errorData);
                 setStatus('error');
             }
         } catch (error) {
+            console.error('Submission Error:', error);
             setStatus('error');
         }
     };
@@ -186,8 +197,6 @@ const Contact = () => {
                                         disabled={status === 'submitting'}
                                         className="w-full group relative overflow-hidden bg-zinc-900 border border-zinc-800 text-white font-black uppercase tracking-[0.5em] py-7 rounded-2xl transition-all duration-500 hover:scale-[1.01] active:scale-[0.99] hover:bg-black hover:shadow-2xl hover:shadow-[#ADFF2F]/20 text-[11px] disabled:opacity-50"
                                     >
-                                        <input type="hidden" name="_next" value="http://localhost:5173/contact" />
-                                        <input type="hidden" name="_captcha" value="false" />
                                         <div className="absolute inset-[-100%] bg-gradient-to-r from-transparent via-[#ADFF2F]/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 skew-x-12"></div>
                                         <span className="relative z-10 flex items-center justify-center gap-4">
                                             {status === 'submitting' ? (

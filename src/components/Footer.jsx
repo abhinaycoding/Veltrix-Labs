@@ -11,15 +11,22 @@ const NewsletterForm = () => {
     setStatus('submitting')
     
     try {
-      const formData = new FormData(e.target)
       const response = await fetch('https://formspree.io/veltrixlabs.io@gmail.com', {
         method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
+        body: JSON.stringify({ email: e.target.email.value }),
+        headers: { 
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
       })
       if (response.ok) setStatus('success')
-      else setStatus('idle')
-    } catch {
+      else {
+        const err = await response.json();
+        console.error('Newsletter Error:', err);
+        setStatus('idle')
+      }
+    } catch (error) {
+      console.error('Newsletter Fetch Error:', error);
       setStatus('idle')
     }
   }

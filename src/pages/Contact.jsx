@@ -118,7 +118,7 @@ const Contact = () => {
                                 </div>
 
                                 <form 
-                                    action="https://formspree.io/f/veltrixlabs.io@gmail.com"
+                                    action="https://formspree.io/veltrixlabs.io@gmail.com"
                                     method="POST"
                                     onSubmit={handleSubmit}
                                     className="space-y-10"

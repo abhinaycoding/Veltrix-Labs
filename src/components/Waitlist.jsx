@@ -5,15 +5,35 @@ export default function Waitlist() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState('idle') // idle, submitting, success
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (!email) return
 
     setStatus('submitting')
-    // Simulate network request
-    setTimeout(() => {
-      setStatus('success')
-    }, 1500)
+    
+    try {
+      const formData = new FormData();
+      formData.append('email', email);
+      formData.append('_subject', 'New Waitlist Enrollment');
+      
+      const response = await fetch('https://formspree.io/veltrixlabs.io@gmail.com', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        setStatus('success')
+        setEmail('')
+      } else {
+        setStatus('idle')
+      }
+    } catch (error) {
+      console.error('Waitlist Error:', error)
+      setStatus('idle')
+    }
   }
 
   return (

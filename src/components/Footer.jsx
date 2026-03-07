@@ -12,7 +12,7 @@ const NewsletterForm = () => {
     
     try {
       const formData = new FormData(e.target)
-      const response = await fetch('https://formspree.io/f/veltrixlabs.io@gmail.com', {
+      const response = await fetch('https://formspree.io/veltrixlabs.io@gmail.com', {
         method: 'POST',
         body: formData,
         headers: { 'Accept': 'application/json' }
